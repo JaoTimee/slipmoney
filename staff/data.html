@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายการสลิปเงินเดือน</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Kanit', sans-serif; background-color: #f8fafc; }
+        .sidebar { background-color: #1e293b; }
+        .active-menu { background-color: #3b82f6; color: white; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+    </style>
+</head>
+<body class="flex flex-col md:flex-row h-screen overflow-hidden text-slate-800 relative">
+
+    <header class="md:hidden h-16 bg-[#1e2b4d] flex items-center px-6 shrink-0 z-30 shadow-sm justify-between">
+        <div class="flex items-center">
+            <button onclick="toggleSidebar()" class="text-white text-xl focus:outline-none mr-4 hover:text-slate-300 transition">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1 class="font-bold text-white text-xl tracking-wide">Logo</h1>
+        </div>
+    </header>
+
+    <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/50 z-40 hidden md:hidden backdrop-blur-sm transition-opacity" onclick="toggleSidebar()"></div>
+
+    <aside id="sidebar" class="fixed md:relative inset-y-0 left-0 z-50 w-64 md:w-56 bg-[#25396f] text-white flex flex-col h-full shrink-0 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out shadow-2xl md:shadow-none">
+        <div class="h-16 md:h-20 flex items-center justify-between px-6 shrink-0 mt-2">
+            <h1 class="font-bold text-white text-2xl tracking-wide hidden md:block">Logo</h1>
+            <h1 class="font-bold text-white text-xl tracking-wide md:hidden">เมนู</h1>
+            <button onclick="toggleSidebar()" class="md:hidden text-slate-400 hover:text-white text-xl focus:outline-none">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <nav class="flex-1 overflow-y-auto no-scrollbar px-4 space-y-2 mt-4">
+            <a href="#" class="flex items-center gap-3 px-4 py-3 bg-[#2563eb] text-white rounded-lg transition text-[13px] font-medium shadow-md">
+                <i class="fas fa-money-bill-wave w-5 text-center"></i> รายการเงินเดือน
+            </a>
+            <a href="signature.html" class="flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white/80 hover:text-white rounded-lg transition text-[13px]">
+                <i class="fas fa-signature w-5 text-center"></i> คำร้องขอลายเซ็น
+            </a>
+        </nav>
+
+        <div class="p-4 mb-4">
+            <a href="../log in.html" class="flex items-center gap-3 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition text-[13px]">
+                <i class="fas fa-sign-out-alt w-5 text-center"></i> ออกจากระบบ
+            </a>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-full overflow-hidden bg-[#f4f7fa]">
+        
+        <header class="hidden md:flex h-16 bg-white border-b border-gray-200 px-6 py-4 justify-between items-center shrink-0">
+            <div>
+                <h1 class="text-xl font-semibold text-gray-800">รายการสลิปเงินเดือน</h1>
+            </div>
+            <a href="profile.html" class="flex items-center gap-3 cursor-pointer p-2 rounded-lg hover:bg-slate-50 transition border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 font-bold flex items-center justify-center text-xs border border-blue-100">XX</div>
+                <div class="leading-tight">
+                    <p class="text-[13px] font-bold text-slate-800">xxxxxx</p>
+                    <p class="text-[10px] text-slate-500">staff</p>
+                </div>
+            </a>
+        </header>
+
+        <div class="flex-1 overflow-y-auto p-4 md:p-6">
+            
+            <div class="flex flex-wrap justify-between items-end mb-6 gap-4">
+                <div class="flex flex-wrap gap-4 items-center">
+                    <div>
+                        <label class="block text-[12px] text-gray-600 mb-1">ประเภทหน่วยงาน</label>
+                        <select id="orgSelect" class="border border-gray-300 rounded-lg px-3 py-2 text-[13px] w-full md:w-64 focus:outline-none focus:border-blue-500 bg-white" onchange="changeData()">
+                            <option value="pao">อบจ. (องค์การบริหารส่วนจังหวัด)</option>
+                            <option value="hospital">รพ.สต. (โรงพยาบาลส่งเสริมสุขภาพตำบล)</option>
+                            <option value="school">โรงเรียน</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[12px] text-gray-600 mb-1">งวดเดือน</label>
+                        <div class="flex gap-2">
+                            <select id="monthSelect" class="border border-gray-300 rounded-lg px-3 py-2 text-[13px] focus:outline-none focus:border-blue-500 bg-white min-w-[120px]" onchange="changeData()">
+                                <option value="" selected>ทั้งหมด</option>
+                                <option value="01">มกราคม</option>
+                                <option value="02">กุมภาพันธ์</option>
+                                <option value="03">มีนาคม</option>
+                                <option value="04">เมษายน</option>
+                                <option value="05">พฤษภาคม</option>
+                                <option value="06">มิถุนายน</option>
+                                <option value="07">กรกฎาคม</option>
+                                <option value="08">สิงหาคม</option>
+                                <option value="09">กันยายน</option>
+                                <option value="10">ตุลาคม</option>
+                                <option value="11">พฤศจิกายน</option>
+                                <option value="12">ธันวาคม</option>
+                            </select>
+                            <select id="yearInput" class="border border-gray-300 rounded-lg px-3 py-2 text-[13px] w-24 focus:outline-none focus:border-blue-500 bg-white" onchange="changeData()">
+                                <option value="2569">2569</option>
+                                <option value="2568">2568</option>
+                                <option value="2567" selected>2567</option>
+                                <option value="2566">2566</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[12px] text-gray-600 mb-1">ค้นหาชื่อพนักงาน</label>
+                        <div class="relative">
+                            <input type="text" id="searchInput" placeholder="กรอกชื่อ-สกุล..." class="border border-gray-300 rounded-lg px-3 py-2 text-[13px] w-full md:w-56 focus:outline-none focus:border-blue-500" oninput="changeData()">
+                            <i class="fas fa-search absolute right-3 top-2.5 text-[12px] text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div class="bg-white p-5 rounded-xl border border-gray-200 flex items-center gap-4 shadow-sm">
+                    <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 text-xl"><i class="fas fa-users"></i></div>
+                    <div>
+                        <div class="text-[12px] text-gray-500">พนักงานทั้งหมด (ที่แสดง)</div>
+                        <div class="text-2xl font-bold text-gray-800" id="stat-total">0 <span class="text-[13px] font-normal text-gray-500">คน</span></div>
+                    </div>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-gray-200 flex items-center gap-4 shadow-sm">
+                    <div class="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center text-green-500 text-xl"><i class="fas fa-check-circle"></i></div>
+                    <div>
+                        <div class="text-[12px] text-gray-500">สลิปที่นำเข้าแล้ว (จำลอง)</div>
+                        <div class="text-2xl font-bold text-gray-800" id="stat-imported">0 <span class="text-[13px] font-normal text-gray-500">คน</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                <div class="p-4 border-b border-gray-100">
+                    <h2 class="text-[15px] font-bold text-gray-800">รายการสลิปเงินเดือน</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-[13px] text-left text-gray-600 whitespace-nowrap">
+                        <thead class="bg-slate-50 border-b border-gray-200 text-gray-500">
+                            <tr>
+                                <th class="px-4 py-3 text-center w-12"><input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500"></th>
+                                <th class="px-4 py-3 text-center font-medium w-16">ลำดับ</th>
+                                <th class="px-4 py-3 font-medium">วัน/เดือน/ปี</th>
+                                <th class="px-4 py-3 font-medium">ชื่อ-สกุล</th>
+                                <th class="px-4 py-3 font-medium">ตำแหน่ง</th>
+                                <th class="px-4 py-3 font-medium">ฝ่าย/แผนก</th>
+                                <th class="px-4 py-3 font-medium text-right">รายการหัก (บาท)</th>
+                                <th class="px-4 py-3 font-medium text-right">เงินเดือนสุทธิ (บาท)</th>
+                                <th class="px-4 py-3 font-medium text-center">จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="divide-y divide-gray-100">
+                            </tbody>
+                    </table>
+                </div>
+                
+                <div class="p-4 border-t border-gray-100 flex justify-between items-center text-[12px] text-gray-500 bg-white">
+                    <div id="table-info">แสดง 1 - 0 จาก 0 รายการ</div>
+                    <div class="flex gap-1 items-center">
+                        <button class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50 text-gray-400 transition"><i class="fas fa-chevron-left text-[10px]"></i></button>
+                        <button class="w-7 h-7 flex items-center justify-center bg-blue-600 text-white rounded shadow-sm">1</button>
+                        <button class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50 transition">2</button>
+                        <button class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50 transition">3</button>
+                        <span class="px-1">...</span>
+                        <button class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50 transition">16</button>
+                        <button class="w-7 h-7 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50 text-gray-400 transition"><i class="fas fa-chevron-right text-[10px]"></i></button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="signatureModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg overflow-hidden transform transition-all flex flex-col">
+            <div class="bg-purple-600 px-6 py-4 flex justify-between items-center shrink-0">
+                <h3 class="text-white font-bold text-lg"><i class="fas fa-signature mr-2"></i> จัดการลายเซ็น</h3>
+                <button onclick="closeModal('signatureModal')" class="text-purple-200 hover:text-white transition"><i class="fas fa-times text-lg"></i></button>
+            </div>
+            
+            <div class="flex border-b border-slate-200 bg-slate-50 shrink-0">
+                <button onclick="switchSigTab('saved')" id="tab-saved" class="flex-1 py-3 text-[13px] font-bold border-b-2 border-purple-600 text-purple-600 transition outline-none">บันทึกไว้</button>
+                <button onclick="switchSigTab('draw')" id="tab-draw" class="flex-1 py-3 text-[13px] font-medium text-slate-500 hover:text-slate-800 transition outline-none">วาดลายเซ็น</button>
+                <button onclick="switchSigTab('upload')" id="tab-upload" class="flex-1 py-3 text-[13px] font-medium text-slate-500 hover:text-slate-800 transition outline-none">อัปโหลดไฟล์</button>
+            </div>
+
+            <div class="p-6 flex-1 flex flex-col bg-white">
+                <div class="mb-4 text-center shrink-0">
+                    <p class="text-[13px] text-slate-600">กำลังตั้งค่าลายเซ็นให้กับพนักงาน:</p>
+                    <p id="sigEmpName" class="font-bold text-slate-800 text-[16px]">xxxxxx</p>
+                </div>
+                
+                <div id="content-saved" class="flex-1 flex flex-col gap-3">
+                    <p class="text-[12px] font-medium text-slate-500 mb-1">เลือกลายเซ็นที่ต้องการใช้งาน:</p>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 overflow-y-auto max-h-[220px] p-1" id="saved-signatures-container">
+                        <label class="border-2 border-purple-500 bg-purple-50 rounded-xl p-2 cursor-pointer relative flex items-center justify-center h-24 transition">
+                            <input type="radio" name="saved_sig" checked class="absolute top-2 left-2 text-purple-600 w-4 h-4 cursor-pointer">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Signature_of_John_Hancock.svg" class="max-h-full max-w-full opacity-80 mix-blend-multiply" alt="signature">
+                        </label>
+                        <label class="border-2 border-slate-200 hover:border-purple-300 rounded-xl p-2 cursor-pointer relative flex items-center justify-center h-24 transition">
+                            <input type="radio" name="saved_sig" class="absolute top-2 left-2 text-purple-600 w-4 h-4 cursor-pointer">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Signature_of_George_Washington.svg" class="max-h-full max-w-full opacity-80 mix-blend-multiply" alt="signature">
+                        </label>
+                    </div>
+                </div>
+
+                <div id="content-draw" class="hidden flex-1 flex flex-col">
+                    <div class="relative border-2 border-dashed border-slate-300 rounded-xl bg-slate-50 flex-1 min-h-[220px] overflow-hidden">
+                        <canvas id="signaturePad" class="w-full h-full cursor-crosshair touch-none"></canvas>
+                        <button onclick="clearSignature()" class="absolute top-2 right-2 bg-white/90 hover:bg-white text-slate-500 hover:text-red-500 px-2 py-1 rounded shadow-sm text-[11px] font-medium border border-slate-200 transition z-10">
+                            <i class="fas fa-eraser"></i> ล้าง
+                        </button>
+                        <div id="signPlaceholder" class="absolute inset-0 flex items-center justify-center text-slate-300 font-medium text-xl pointer-events-none select-none">
+                            เซ็นชื่อที่นี่
+                        </div>
+                    </div>
+                </div>
+
+                <div id="content-upload" class="hidden flex-1 flex flex-col">
+                    <label class="border-2 border-dashed border-slate-300 rounded-xl p-6 flex flex-col items-center justify-center bg-slate-50 hover:bg-purple-50 hover:border-purple-300 transition cursor-pointer flex-1 min-h-[220px] relative overflow-hidden group">
+                        <input type="file" id="sigFileInput" accept="image/png, image/jpeg" class="hidden" onchange="previewFile(this)">
+                        <div id="uploadPlaceholder" class="flex flex-col items-center pointer-events-none">
+                            <i class="fas fa-cloud-upload-alt text-4xl text-purple-400 mb-3 group-hover:text-purple-500 transition"></i>
+                            <p class="text-[14px] font-medium text-slate-700">คลิกเพื่ออัปโหลดไฟล์ลายเซ็น</p>
+                            <p class="text-[11px] text-slate-400 mt-1">รองรับ PNG, JPG (พื้นหลังโปร่งใสจะดีที่สุด)</p>
+                        </div>
+                        <img id="filePreview" src="" class="hidden max-h-full max-w-full absolute z-10 p-4 object-contain mix-blend-multiply" alt="preview">
+                        <button id="removeFileBtn" onclick="removeFile(event)" class="hidden absolute top-2 right-2 bg-white/90 hover:bg-white text-slate-500 hover:text-red-500 px-2 py-1 rounded shadow-sm text-[11px] font-medium border border-slate-200 transition z-20">
+                            <i class="fas fa-trash"></i> ลบรูป
+                        </button>
+                    </label>
+                </div>
+
+            </div>
+            <div class="bg-slate-50 px-6 py-4 flex justify-end gap-3 border-t border-slate-200 shrink-0">
+                <button onclick="closeModal('signatureModal')" class="px-4 py-2 bg-white border border-slate-300 rounded-lg text-[13px] font-medium text-slate-600 hover:bg-slate-50 transition">ยกเลิก</button>
+                <button onclick="saveSignature()" class="px-4 py-2 bg-purple-600 rounded-lg text-[13px] font-medium text-white hover:bg-purple-700 transition shadow-sm">บันทึกใช้งาน</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ================= ควบคุม Sidebar บนมือถือ =================
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+
+        // ================= ข้อมูลและการแสดงผลตาราง (อัปเดตข้อมูลตามภาพ) =================
+        const database = {
+            'pao': { // อบจ.
+                data: [
+                    { id: 'E01', date: '25/05/2567', name: 'นางสาวศิริวรรณ จันทร์ดี', pos: 'เจ้าหน้าที่บัญชี', dept: 'บัญชีและการเงิน', deduct: '500.00', sal: '29,800.00' },
+                    { id: 'E02', date: '25/05/2567', name: 'นายกฤษฎา พงศ์พัฒน์', pos: 'เจ้าหน้าที่การตลาด', dept: 'การตลาด', deduct: '0.00', sal: '32,450.00' },
+                    { id: 'E03', date: '25/04/2567', name: 'นางสาวจิราภรณ์ มณีวงศ์', pos: 'เจ้าหน้าที่ทรัพยากรบุคคล', dept: 'ทรัพยากรบุคคล', deduct: '750.00', sal: '27,900.00' },
+                    { id: 'E04', date: '25/04/2567', name: 'นายธนวัฒน์ เจริญกิจ', pos: 'วิศวกร', dept: 'วิศวกรรม', deduct: '1,200.00', sal: '35,600.00' },
+                    { id: 'E05', date: '25/06/2567', name: 'นางสาววรัญญา แสงทอง', pos: 'เจ้าหน้าที่ธุรการ', dept: 'อำนวยการ', deduct: '0.00', sal: '24,750.00' },
+                    { id: 'E06', date: '25/05/2567', name: 'นางสาวธิดารัตน์ อินทร์คำ', pos: 'เจ้าหน้าที่จัดซื้อ', dept: 'จัดซื้อ', deduct: '0.00', sal: '26,150.00' }, 
+                    { id: 'E07', date: '25/05/2567', name: 'นายวัชรพล กลิ่นหอม', pos: 'พนักงานขับรถ', dept: 'สนับสนุน', deduct: '300.00', sal: '18,900.00' }
+                ]
+            },
+            'hospital': { // รพ.สต.
+                data: [
+                    { id: 'H01', date: '25/05/2567', name: 'นางสมศรี ใจดี', pos: 'พยาบาลวิชาชีพชำนาญการ', dept: 'บริการทางการแพทย์', deduct: '1,500.00', sal: '38,500.00' },
+                    { id: 'H02', date: '25/04/2567', name: 'นายสมชาย รักสุขภาพ', pos: 'นักวิชาการสาธารณสุข', dept: 'ส่งเสริมสุขภาพ', deduct: '0.00', sal: '25,300.00' }
+                ]
+            },
+            'school': { // โรงเรียน
+                data: [
+                    { id: 'S01', date: '25/05/2567', name: 'นายวิชาญ รักเรียน', pos: 'ผู้อำนวยการสถานศึกษา', dept: 'บริหารงานโรงเรียน', deduct: '2,500.00', sal: '45,800.00' }
+                ]
+            }
+        };
+
+        function changeData() {
+            const org = document.getElementById('orgSelect').value;
+            const searchKeyword = document.getElementById('searchInput').value.toLowerCase();
+            const selectedMonth = document.getElementById('monthSelect').value;
+            const selectedYear = document.getElementById('yearInput').value;
+            
+            const currentData = database[org] || { data: [] };
+            
+            const filteredData = currentData.data.filter(row => {
+                const dateParts = row.date.split('/');
+                const rowMonth = dateParts[1];
+                const rowYear = dateParts[2];
+                
+                const matchName = row.name.toLowerCase().includes(searchKeyword);
+                const matchMonth = selectedMonth === "" || rowMonth === selectedMonth;
+                const matchYear = selectedYear === "" || rowYear === selectedYear;
+                
+                return matchName && matchMonth && matchYear;
+            });
+            
+            document.getElementById('stat-total').innerHTML = `${filteredData.length} <span class="text-[13px] font-normal text-gray-500">คน</span>`;
+            document.getElementById('stat-imported').innerHTML = `${filteredData.length > 0 ? filteredData.length : 0} <span class="text-[13px] font-normal text-gray-500">คน</span>`; 
+
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            
+            if (filteredData.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="9" class="px-4 py-8 text-center text-gray-500">ไม่พบข้อมูลสลิปเงินเดือนที่ตรงกับเงื่อนไข</td></tr>`;
+                document.getElementById('table-info').innerText = `แสดง 0 รายการ`;
+                return;
+            }
+
+            filteredData.forEach((row, index) => {
+                const deductColor = row.deduct !== '0.00' ? 'text-red-500' : 'text-red-500';
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-gray-50 transition-colors';
+                
+                // ลบปุ่ม "แก้ไขเงินเดือน" ออกไปแล้ว เหลือแค่ "แก้ไขลายเซ็น"
+                tr.innerHTML = `
+                    <td class="px-4 py-3 text-center"><input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500"></td>
+                    <td class="px-4 py-3 text-center text-slate-500">${index + 1}</td>
+                    <td class="px-4 py-3 text-gray-500">${row.date}</td>
+                    <td class="px-4 py-3 font-medium">${row.name}</td>
+                    <td class="px-4 py-3">${row.pos}</td>
+                    <td class="px-4 py-3">${row.dept}</td>
+                    <td class="px-4 py-3 text-right ${deductColor}">${row.deduct}</td>
+                    <td class="px-4 py-3 text-right font-medium text-slate-800">${row.sal}</td>
+                    <td class="px-4 py-3 text-center">
+                        <button onclick="openSignatureModal('${org}', '${row.id}')" class="text-[11px] bg-purple-50 hover:bg-purple-100 text-purple-600 border border-purple-200 px-3 py-1.5 rounded transition flex items-center justify-center mx-auto gap-1.5 shadow-sm">
+                            <i class="fas fa-signature"></i> แก้ไขลายเซ็น
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('table-info').innerText = `แสดง 1 - ${filteredData.length} จาก ${filteredData.length} รายการ`;
+        }
+
+        // ================= ฟังก์ชัน Modal =================
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        let activeSigTab = 'saved';
+
+        function openSignatureModal(org, id) {
+            const emp = database[org].data.find(r => r.id === id);
+            document.getElementById('sigEmpName').innerText = emp.name;
+            document.getElementById('signatureModal').classList.remove('hidden');
+            switchSigTab('saved');
+        }
+
+        function switchSigTab(tab) {
+            activeSigTab = tab;
+            const tabs = ['saved', 'draw', 'upload'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                const content = document.getElementById(`content-${t}`);
+                
+                if(t === tab) {
+                    btn.classList.add('border-b-2', 'border-purple-600', 'text-purple-600', 'font-bold');
+                    btn.classList.remove('text-slate-500', 'font-medium');
+                    content.classList.remove('hidden');
+                } else {
+                    btn.classList.remove('border-b-2', 'border-purple-600', 'text-purple-600', 'font-bold');
+                    btn.classList.add('text-slate-500', 'font-medium');
+                    content.classList.add('hidden');
+                }
+            });
+
+            if(tab === 'draw') {
+                setTimeout(() => {
+                    if (!canvasInitialized) {
+                        initSignaturePad();
+                        canvasInitialized = true;
+                    }
+                    resizeCanvas();
+                }, 50);
+            }
+        }
+
+        function saveSignature() {
+            let msg = '';
+            if(activeSigTab === 'saved') msg = 'ตั้งค่าลายเซ็นจากที่บันทึกไว้เรียบร้อยแล้ว';
+            else if(activeSigTab === 'draw') msg = 'บันทึกลายเซ็นใหม่เรียบร้อยแล้ว';
+            else if(activeSigTab === 'upload') msg = 'อัปโหลดและใช้ไฟล์ลายเซ็นเรียบร้อยแล้ว';
+
+            closeModal('signatureModal');
+            alert(msg);
+        }
+
+        // สลับสี Radio Button ของลายเซ็นที่บันทึกไว้
+        document.addEventListener('change', function(e) {
+            if (e.target.name === 'saved_sig') {
+                document.querySelectorAll('input[name="saved_sig"]').forEach(radio => {
+                    if (radio.checked) {
+                        radio.closest('label').classList.add('border-purple-500', 'bg-purple-50');
+                        radio.closest('label').classList.remove('border-slate-200');
+                    } else {
+                        radio.closest('label').classList.remove('border-purple-500', 'bg-purple-50');
+                        radio.closest('label').classList.add('border-slate-200');
+                    }
+                });
+            }
+        });
+
+        // อัปโหลดไฟล์ (Tab 3)
+        function previewFile(input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('uploadPlaceholder').classList.add('hidden');
+                    document.getElementById('filePreview').src = e.target.result;
+                    document.getElementById('filePreview').classList.remove('hidden');
+                    document.getElementById('removeFileBtn').classList.remove('hidden');
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function removeFile(event) {
+            event.preventDefault(); 
+            document.getElementById('sigFileInput').value = '';
+            document.getElementById('filePreview').src = '';
+            document.getElementById('filePreview').classList.add('hidden');
+            document.getElementById('removeFileBtn').classList.add('hidden');
+            document.getElementById('uploadPlaceholder').classList.remove('hidden');
+        }
+
+        // ระบบวาดลายเซ็น (Canvas) (Tab 2)
+        let canvas, ctx;
+        let isDrawing = false;
+        let canvasInitialized = false;
+
+        function initSignaturePad() {
+            canvas = document.getElementById('signaturePad');
+            ctx = canvas.getContext('2d');
+            
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+
+            canvas.addEventListener('touchstart', handleTouchStart, {passive: false});
+            canvas.addEventListener('touchmove', handleTouchMove, {passive: false});
+            canvas.addEventListener('touchend', stopDrawing);
+            
+            window.addEventListener('resize', resizeCanvas);
+        }
+
+        function resizeCanvas() {
+            if(!canvas) return;
+            const rect = canvas.parentElement.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.strokeStyle = '#1e293b'; 
+        }
+
+        function getCoordinates(e) {
+            const rect = canvas.getBoundingClientRect();
+            if (e.touches && e.touches.length > 0) {
+                return { x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top };
+            } else {
+                return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+            }
+        }
+
+        function startDrawing(e) {
+            isDrawing = true;
+            document.getElementById('signPlaceholder').classList.add('hidden');
+            const pos = getCoordinates(e);
+            ctx.beginPath();
+            ctx.moveTo(pos.x, pos.y);
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            e.preventDefault(); 
+            const pos = getCoordinates(e);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+        }
+
+        function stopDrawing() { isDrawing = false; }
+        function handleTouchStart(e) { e.preventDefault(); startDrawing(e); }
+        function handleTouchMove(e) { e.preventDefault(); draw(e); }
+
+        function clearSignature() {
+            if (ctx && canvas) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                document.getElementById('signPlaceholder').classList.remove('hidden');
+            }
+        }
+
+        // Initialize
+        window.onload = changeData;
+    </script>
+</body>
+</html>

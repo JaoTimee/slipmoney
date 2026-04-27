@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คำร้องขอลายเซ็นสลิปเงินเดือน</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Kanit', sans-serif; background-color: #f4f7fa; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="flex flex-col md:flex-row h-screen overflow-hidden text-slate-800 relative">
+
+    <header class="md:hidden h-16 bg-[#1e2b4d] flex items-center px-6 shrink-0 z-30 shadow-sm justify-between">
+        <div class="flex items-center">
+            <button onclick="toggleSidebar()" class="text-white text-xl focus:outline-none mr-4 hover:text-slate-300 transition">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1 class="font-bold text-white text-xl tracking-wide">Logo</h1>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 font-bold flex items-center justify-center text-xs border border-white/20">XX</div>
+    </header>
+
+    <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/50 z-40 hidden md:hidden backdrop-blur-sm transition-opacity" onclick="toggleSidebar()"></div>
+
+    <aside id="sidebar" class="fixed md:relative inset-y-0 left-0 z-50 w-64 md:w-56 bg-[#25396f] text-white flex flex-col h-full shrink-0 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out shadow-2xl md:shadow-none">
+        <div class="h-16 md:h-20 flex items-center justify-between px-6 shrink-0 mt-2">
+            <h1 class="font-bold text-white text-2xl tracking-wide hidden md:block">Logo</h1>
+            <h1 class="font-bold text-white text-xl tracking-wide md:hidden">เมนู</h1>
+            <button onclick="toggleSidebar()" class="md:hidden text-slate-400 hover:text-white text-xl focus:outline-none">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <nav class="flex-1 overflow-y-auto no-scrollbar px-4 space-y-2 mt-4">
+            <a href="data.html" class="flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white/80 hover:text-white rounded-lg transition text-[13px]">
+                <i class="fas fa-money-bill-wave w-5 text-center"></i> รายการเงินเดือน
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 bg-[#2563eb] text-white rounded-lg transition text-[13px] font-medium shadow-md">
+                <i class="fas fa-signature w-5 text-center"></i> คำร้องขอลายเซ็น
+            </a>
+        </nav>
+
+        <div class="p-4 mb-4">
+            <a href="../log in.html" class="flex items-center gap-3 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition text-[13px]">
+                <i class="fas fa-sign-out-alt w-5 text-center"></i> ออกจากระบบ
+            </a>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-full overflow-hidden bg-[#f4f7fa]">
+        
+        <header class="hidden md:flex h-16 bg-white justify-between items-center px-8 z-10 border-b border-slate-200 shadow-sm shrink-0">
+            <div>
+                <h1 class="text-[18px] font-bold text-slate-800">คำร้องขอลายเซ็นสลิปเงินเดือน</h1>
+            </div>
+            <a href="profile.html" class="flex items-center gap-3 cursor-pointer p-2 rounded-lg hover:bg-slate-50 transition border border-slate-100">
+                <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 font-bold flex items-center justify-center text-xs border border-blue-100">XX</div>
+                <div class="leading-tight">
+                    <p class="text-[13px] font-bold text-slate-800">xxxxxx</p>
+                    <p class="text-[10px] text-slate-500">staff</p>
+                </div>
+            </a>
+        </header>
+
+        <div class="flex-1 overflow-y-auto p-4 md:p-6">
+            <div class="max-w-full mx-auto">
+                
+                <div class="flex flex-wrap items-end gap-3 mb-6 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <div>
+                        <label class="block text-[12px] text-slate-500 mb-1.5">สถานะ</label>
+                        <select class="border border-slate-300 rounded-lg px-3 py-2 text-[13px] focus:outline-none focus:border-blue-500 bg-white w-40">
+                            <option>ทั้งหมด</option>
+                            <option>รอลายเซ็น</option>
+                            <option>ลงนามแล้ว</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[12px] text-slate-500 mb-1.5">ช่วงวันที่</label>
+                        <div class="relative">
+                            <i class="far fa-calendar-alt absolute left-3 top-[10px] text-slate-400 text-[13px]"></i>
+                            <input type="text" value="01/05/2567 - 31/05/2567" class="border border-slate-300 rounded-lg pl-9 pr-8 py-2 text-[13px] focus:outline-none focus:border-blue-500 bg-white w-60 text-slate-700">
+                            <i class="fas fa-chevron-right absolute right-3 top-[13px] text-slate-400 text-[10px]"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[12px] text-slate-500 mb-1.5">แผนก</label>
+                        <select class="border border-slate-300 rounded-lg px-3 py-2 text-[13px] focus:outline-none focus:border-blue-500 bg-white w-40">
+                            <option>ทั้งหมด</option>
+                            <option>บัญชีและการเงิน</option>
+                            <option>การตลาด</option>
+                        </select>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="bg-[#2563eb] text-white px-4 py-2 rounded-lg text-[13px] hover:bg-blue-700 transition flex items-center gap-2 shadow-sm font-medium">
+                            <i class="fas fa-search"></i> ค้นหา
+                        </button>
+                        <button class="bg-white border border-slate-300 text-slate-600 px-4 py-2 rounded-lg text-[13px] hover:bg-slate-50 transition flex items-center gap-2 shadow-sm font-medium">
+                            <i class="fas fa-sync-alt"></i> รีเซ็ต
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
+                        <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 text-xl"><i class="fas fa-file-alt"></i></div>
+                        <div>
+                            <div class="text-[12px] text-slate-500">ทั้งหมด</div>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-2xl font-bold text-slate-800" id="stat-total">0</span>
+                                <span class="text-[13px] font-normal text-slate-500">รายการ</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
+                        <div class="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 text-xl"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <div class="text-[12px] text-slate-500">รอลายเซ็น</div>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-2xl font-bold text-slate-800" id="stat-pending">0</span>
+                                <span class="text-[13px] font-normal text-slate-500">รายการ</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
+                        <div class="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center text-green-500 text-xl"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <div class="text-[12px] text-slate-500">ลงนามแล้ว</div>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-2xl font-bold text-slate-800" id="stat-success">0</span>
+                                <span class="text-[13px] font-normal text-slate-500">รายการ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
+                    <div class="p-4 border-b border-slate-100">
+                        <h2 class="text-[15px] font-bold text-slate-800">รายการคำร้องขอลายเซ็น</h2>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-[13px] text-slate-600 whitespace-nowrap">
+                            <thead class="bg-slate-50 border-b border-slate-200 text-slate-500">
+                                <tr>
+                                    <th class="px-6 py-4 font-medium text-center w-16">ลำดับ</th>
+                                    <th class="px-6 py-4 font-medium">วันที่ขอ</th>
+                                    <th class="px-6 py-4 font-medium">ชื่อ-สกุล</th>
+                                    <th class="px-6 py-4 font-medium">แผนก</th>
+                                    <th class="px-6 py-4 font-medium">เดือน/ปี</th>
+                                    <th class="px-6 py-4 font-medium">ประเภทลายเซ็น</th>
+                                    <th class="px-6 py-4 font-medium text-center">สถานะ</th>
+                                    <th class="px-6 py-4 font-medium text-center">จัดการ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100" id="tableBody">
+                                </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="p-4 border-t border-slate-100 flex justify-between items-center text-[12px] text-slate-500 bg-white">
+                        <div id="table-info">แสดง 1 - 7 จาก 7 รายการ</div>
+                        <div class="flex gap-2 items-center">
+                            <div class="flex gap-1">
+                                <button class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded hover:bg-slate-50 text-slate-400 transition"><i class="fas fa-chevron-left text-[10px]"></i></button>
+                                <button class="w-8 h-8 flex items-center justify-center bg-[#2563eb] text-white rounded shadow-sm font-medium">1</button>
+                                <button class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded hover:bg-slate-50 transition">2</button>
+                                <button class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded hover:bg-slate-50 transition">3</button>
+                                <button class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded hover:bg-slate-50 text-slate-400 transition"><i class="fas fa-chevron-right text-[10px]"></i></button>
+                            </div>
+                            <select class="border border-slate-200 rounded px-2 py-1.5 focus:outline-none bg-white">
+                                <option>10 / หน้า</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 mb-8">
+                    <h3 class="font-bold text-slate-800 text-[14px] mb-3">หมายเหตุ</h3>
+                    <ul class="list-disc list-inside text-[12px] text-slate-500 space-y-1.5">
+                        <li>คำร้องขอลายเซ็นจะถูกส่งจากระบบสลิปเงินเดือนเมื่อผู้ใช้กด "ขอสลิปฉบับจริง"</li>
+                        <li>กรุณาตรวจสอบลายเซ็นและเปลี่ยนแปลงหากจำเป็น</li>
+                        <li>หลังจากบันทึกการเปลี่ยนแปลง ลายเซ็นใหม่จะถูกใช้กับสลิปเงินเดือนฉบับถัดไป</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // ฟังก์ชันเปิด/ปิด Sidebar บนมือถือ
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+
+        // ข้อมูลจำลอง 
+        let mockData = [
+            { date: '20/05/2567', name: 'นางสาวศิริวรรณ จันทร์ดี', dept: 'บัญชีและการเงิน', month: 'เมษายน 2567', type: 'ลายเซ็นแบบปากกา', status: 'pending' },
+            { date: '20/05/2567', name: 'นายกฤษฎา พงศ์พัฒน์', dept: 'การตลาด', month: 'เมษายน 2567', type: 'ลายเซ็นแบบปากกา', status: 'pending' },
+            { date: '19/05/2567', name: 'นางสาวจิราภรณ์ มณีวงศ์', dept: 'ทรัพยากรบุคคล', month: 'เมษายน 2567', type: 'ลายเซ็นแบบปากกา', status: 'success' },
+            { date: '19/05/2567', name: 'นายธนวัฒน์ เจริญกิจ', dept: 'วิศวกรรม', month: 'เมษายน 2567', type: 'ลายเซ็นแบบปากกา', status: 'success' },
+            { date: '18/05/2567', name: 'นางสาววรัญญา แสงทอง', dept: 'อำนวยการ', month: 'เมษายน 2567', type: 'ลายเซ็นแบบปากกา', status: 'pending' },
+            { date: '17/05/2567', name: 'นางสาวธิดารัตน์ อินทร์คำ', dept: 'จัดซื้อ', month: 'เมษายน 2567', type: 'ลายเซ็นแบบปากกา', status: 'success' },
+            { date: '17/05/2567', name: 'นายวัชรพล กลิ่นหอม', dept: 'สนับสนุน', month: 'เมษายน 2567', type: 'ลายเซ็นแบบปากกา', status: 'success' }
+        ];
+
+        // ฟังก์ชันสลับสถานะเมื่อกดปุ่มเปลี่ยนสถานะ
+        function toggleStatus(index) {
+            if (mockData[index].status === 'pending') {
+                mockData[index].status = 'success';
+            } else {
+                mockData[index].status = 'pending';
+            }
+            renderTable();
+            updateStats();
+        }
+
+        // อัปเดตตัวเลขสถิติบนการ์ด
+        function updateStats() {
+            const total = mockData.length;
+            const pending = mockData.filter(d => d.status === 'pending').length;
+            const success = mockData.filter(d => d.status === 'success').length;
+
+            document.getElementById('stat-total').innerText = total;
+            document.getElementById('stat-pending').innerText = pending;
+            document.getElementById('stat-success').innerText = success;
+            document.getElementById('table-info').innerText = `แสดง 1 - ${total} จาก ${total} รายการ`;
+        }
+
+        // ออกแบบป้ายสถานะ
+        function getStatusBadge(status) {
+            if(status === 'success') return `<span class="bg-green-50 text-green-600 border border-green-200 px-3 py-1 rounded text-[11px] font-medium inline-block w-24 text-center transition-colors">ลงนามแล้ว</span>`;
+            if(status === 'pending') return `<span class="bg-orange-50 text-orange-600 border border-orange-200 px-3 py-1 rounded text-[11px] font-medium inline-block w-24 text-center transition-colors">รอลายเซ็น</span>`;
+            return '';
+        }
+
+        // เรนเดอร์ตาราง
+        function renderTable() {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            
+            mockData.forEach((row, index) => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition-colors';
+                tr.innerHTML = `
+                    <td class="px-6 py-4 text-center text-slate-500">${index + 1}</td>
+                    <td class="px-6 py-4 text-slate-500">${row.date}</td>
+                    <td class="px-6 py-4 font-medium text-slate-700">${row.name}</td>
+                    <td class="px-6 py-4">${row.dept}</td>
+                    <td class="px-6 py-4">${row.month}</td>
+                    <td class="px-6 py-4 text-slate-500">${row.type}</td>
+                    <td class="px-6 py-4 text-center">${getStatusBadge(row.status)}</td>
+                    <td class="px-6 py-4 text-center">
+                        <button onclick="toggleStatus(${index})" class="px-3 py-1.5 rounded border border-blue-200 text-[#2563eb] hover:bg-blue-50 transition flex items-center justify-center mx-auto gap-1.5 text-[11px] font-medium shadow-sm">
+                            <i class="fas fa-exchange-alt"></i> เปลี่ยนสถานะ
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Initialize ตอนโหลดหน้าเว็บ
+        window.onload = function() {
+            renderTable();
+            updateStats();
+        };
+    </script>
+</body>
+</html>
