@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สลิปเงินเดือน</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Kanit', sans-serif; background-color: #f4f7fa; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* ซ่อนลูกศร default ของ details/summary */
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+    </style>
+</head>
+<body class="flex flex-col md:flex-row h-screen overflow-hidden text-slate-800 relative">
+
+    <header class="md:hidden h-16 bg-[#25396f] flex items-center px-6 shrink-0 z-30 shadow-sm justify-between">
+        <div class="flex items-center">
+            <button onclick="toggleSidebar()" class="text-white text-xl focus:outline-none mr-4 hover:text-slate-300 transition">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1 class="font-bold text-white text-xl tracking-wide">Logo</h1>
+        </div>
+        <a href="profile.html" class="w-8 h-8 rounded-full overflow-hidden border border-white/20 block">
+            <img src="https://ui-avatars.com/api/?name=K+K&background=f97316&color=fff" alt="Profile" class="w-full h-full object-cover">
+        </a>
+    </header>
+
+    <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/50 z-40 hidden md:hidden backdrop-blur-sm transition-opacity" onclick="toggleSidebar()"></div>
+
+    <aside id="sidebar" class="fixed md:relative inset-y-0 left-0 z-50 w-64 md:w-56 bg-[#25396f] text-slate-300 flex flex-col h-full shrink-0 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out shadow-2xl md:shadow-none">
+        <div class="h-16 md:h-20 flex items-center justify-between px-6 shrink-0">
+            <h1 class="font-bold text-white text-2xl tracking-wide hidden md:block">Logo</h1>
+            <h1 class="font-bold text-white text-xl tracking-wide md:hidden">เมนู</h1>
+            <button onclick="toggleSidebar()" class="md:hidden text-slate-400 hover:text-white text-xl focus:outline-none">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <nav class="flex-1 overflow-y-auto no-scrollbar px-4 space-y-2 mt-2 md:mt-4">
+            <a href="#" class="flex items-center gap-3 px-4 py-3 bg-[#3b65f5] text-white rounded-lg transition text-[13px] font-medium shadow-md">
+                <i class="fas fa-pen-nib w-4 text-center"></i> ลายเซ็นอิเล็กทรอนิกส์
+            </a>
+            <a href="signnature.html" class="flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white/80 hover:text-white rounded-lg transition text-[13px]">
+                <i class="fas fa-signature w-4 text-center"></i> ลายเซ็นปากกา
+            </a>
+        </nav>
+
+        <div class="p-4 mb-4">
+            <a href="../log in.html" class="flex items-center gap-3 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition text-[13px]">
+                <i class="fas fa-sign-out-alt w-4 text-center"></i> ออกจากระบบ
+            </a>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-full overflow-hidden bg-[#f4f7fa]">
+        
+        <header class="hidden md:flex h-16 bg-white justify-end items-center px-8 z-10 border-b border-slate-200 shadow-sm shrink-0">
+            <a href="profile.html" class="flex items-center gap-3 cursor-pointer p-2 rounded-lg hover:bg-slate-50 transition">
+                <img src="https://ui-avatars.com/api/?name=K+K&background=f97316&color=fff&rounded=true" alt="Profile" class="w-9 h-9 rounded-full object-cover">
+                <div class="leading-tight">
+                    <p class="text-[13px] font-bold text-slate-800">นางสาว ก ไก่</p>
+                    <p class="text-[10px] text-slate-500">รหัสพนักงาน : xxxxxx</p>
+                </div>
+            </a>
+        </header>
+
+        <div class="flex-1 overflow-y-auto p-4 md:p-8">
+            <div class="max-w-[1200px] mx-auto">
+                
+                <h1 class="text-xl md:text-2xl font-bold text-slate-800 mb-6">สลิปเงินเดือน</h1>
+
+                <div class="flex flex-wrap items-end gap-4 mb-8">
+                    
+                    <div class="relative w-full md:w-32">
+                        <label class="block text-[13px] text-slate-500 mb-2">ปี</label>
+                        <details class="relative group" id="year-details">
+                            <summary class="border border-slate-200 bg-white rounded-lg px-4 py-2 cursor-pointer flex justify-between items-center outline-none hover:border-[#3b65f5] transition">
+                                <span class="text-[14px] text-slate-700 font-medium truncate pr-2" id="year-display">2569</span>
+                                <i class="fas fa-chevron-down text-[10px] text-slate-400 transition group-open:rotate-180"></i>
+                            </summary>
+                            <div class="absolute z-30 w-full mt-1 bg-white border border-slate-200 rounded-lg shadow-lg max-h-48 overflow-y-auto p-1.5 space-y-1">
+                                <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
+                                    <input type="checkbox" value="2569" checked class="year-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('year')"> 2569
+                                </label>
+                                <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
+                                    <input type="checkbox" value="2568" class="year-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('year')"> 2568
+                                </label>
+                                <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
+                                    <input type="checkbox" value="2567" class="year-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('year')"> 2567
+                                </label>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="relative flex-1 md:flex-none md:w-56">
+                        <label class="block text-[13px] text-slate-500 mb-2">เดือน</label>
+                        <details class="relative group" id="month-details">
+                            <summary class="border border-slate-200 bg-white rounded-lg px-4 py-2 cursor-pointer flex justify-between items-center outline-none hover:border-[#3b65f5] transition">
+                                <span class="text-[14px] text-slate-700 font-medium truncate pr-2" id="month-display">พฤษภาคม</span>
+                                <i class="fas fa-chevron-down text-[10px] text-slate-400 transition group-open:rotate-180"></i>
+                            </summary>
+                            <div class="absolute z-30 w-full mt-1 bg-white border border-slate-200 rounded-lg shadow-lg max-h-60 overflow-y-auto p-1.5 space-y-1">
+                                <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
+                                    <input type="checkbox" value="มกราคม" class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> มกราคม
+                                </label>
+                                <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
+                                    <input type="checkbox" value="กุมภาพันธ์" class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> กุมภาพันธ์
+                                </label>
+                                <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
+                                    <input type="checkbox" value="มีนาคม" class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> มีนาคม
+                                </label>
+                                <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
+                                    <input type="checkbox" value="เมษายน" class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> เมษายน
+                                </label>
+                                <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
+                                    <input type="checkbox" value="พฤษภาคม" checked class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> พฤษภาคม
+                                </label>
+                                <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
+                                    <input type="checkbox" value="มิถุนายน" class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> มิถุนายน
+                                </label>
+                                <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
+                                    <input type="checkbox" value="กรกฎาคม" class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> กรกฎาคม
+                                </label>
+                                <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
+                                    <input type="checkbox" value="สิงหาคม" class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> สิงหาคม
+                                </label>
+                                <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
+                                    <input type="checkbox" value="กันยายน" class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> กันยายน
+                                </label>
+                                <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
+                                    <input type="checkbox" value="ตุลาคม" class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> ตุลาคม
+                                </label>
+                                <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
+                                    <input type="checkbox" value="พฤศจิกายน" class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> พฤศจิกายน
+                                </label>
+                                <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
+                                    <input type="checkbox" value="ธันวาคม" class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> ธันวาคม
+                                </label>
+                            </div>
+                        </details>
+                    </div>
+
+                    <button onclick="showSlipData()" class="bg-[#3b65f5] text-white px-6 py-2 rounded-lg text-[14px] font-medium hover:bg-blue-700 transition w-full md:w-auto shadow-sm">ดูสลิป</button>
+                </div>
+
+                <div id="empty-state" class="flex flex-col items-center justify-center py-24 text-slate-400 bg-white rounded-xl shadow-sm border border-slate-200">
+                    <i class="fas fa-file-invoice-dollar text-6xl mb-4 opacity-30 text-[#3b65f5]"></i>
+                    <p class="text-lg font-bold text-slate-600 mb-1">ยังไม่มีข้อมูลสลิปเงินเดือน</p>
+                    <p class="text-sm text-slate-500">กรุณาเลือกปีและเดือน จากนั้นกดปุ่ม "ดูสลิป" เพื่อแสดงข้อมูล</p>
+                </div>
+
+                <div id="slip-content" class="hidden grid grid-cols-1 xl:grid-cols-[1fr_320px] gap-6 fade-in">
+                    
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-10 overflow-x-auto">
+                        <div class="flex flex-col md:flex-row justify-between items-start mb-6 gap-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-[50px] h-[50px] shrink-0 bg-[#3b65f5] rounded-full flex items-center justify-center text-white font-bold text-[11px] italic">Logo</div>
+                                <div>
+                                    <h2 class="font-bold text-slate-800 text-sm">xxxxxxx</h2>
+                                    <p class="text-[11px] text-slate-500 mt-1">xxxxxxxxxxxxxxx</p>
+                                </div>
+                            </div>
+                            <div class="md:text-right">
+                                <p class="font-bold text-slate-800 text-[14px]">สลิปเงินเดือน / Pay Slip</p>
+                                <p class="text-[12px] text-slate-500 mt-1" id="slip-date-header">เดือนพฤษภาคม 2567</p>
+                            </div>
+                        </div>
+                        
+                        <hr class="border-slate-100 mb-6">
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3 text-[12px] mb-8 min-w-[500px]">
+                            <div class="grid grid-cols-[100px_1fr] gap-2"><span class="text-slate-500">xxxxxxx</span> <span class="font-medium text-slate-800">xxxxxxx</span></div>
+                            <div class="grid grid-cols-[100px_1fr] gap-2"><span class="text-slate-500">xxxxxx</span> <span class="font-medium text-slate-800">xxxxxx</span></div>
+                            <div class="grid grid-cols-[100px_1fr] gap-2"><span class="text-slate-500">ชื่อ-สกุล</span> <span class="font-medium text-slate-800">นางสาว ก ไก่</span></div>
+                            <div class="grid grid-cols-[100px_1fr] gap-2"><span class="text-slate-500">ประเภทพนักงาน</span> <span class="font-medium text-slate-800">xxxxxx</span></div>
+                            <div class="grid grid-cols-[100px_1fr] gap-2"><span class="text-slate-500">ตำแหน่ง</span> <span class="font-medium text-slate-800">xxxxxx</span></div>
+                            <div class="grid grid-cols-[100px_1fr] gap-2"><span class="text-slate-500">xxxxx</span> <span class="font-medium text-slate-800">xxxxxx</span></div>
+                            <div class="grid grid-cols-[100px_1fr] gap-2"><span class="text-slate-500">สังกัด</span> <span class="font-medium text-slate-800">xxxxxx</span></div>
+                        </div>
+
+                        <div class="border border-slate-200 rounded-lg overflow-x-auto mb-6">
+                            <table class="w-full text-[12px] text-left min-w-[500px]">
+                                <thead class="bg-slate-50 border-b border-slate-200 text-slate-800">
+                                    <tr>
+                                        <th class="p-3 font-bold w-1/4">รายการรับ</th>
+                                        <th class="p-3 font-bold w-1/4 text-right">จำนวนเงิน (บาท)</th>
+                                        <th class="p-3 font-bold w-1/4 border-l border-slate-200 pl-4">รายการหัก</th>
+                                        <th class="p-3 font-bold w-1/4 text-right">จำนวนเงิน (บาท)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-slate-800">
+                                    <tr class="border-b border-slate-50">
+                                        <td class="p-3 pt-4">เงินเดือน</td>
+                                        <td class="p-3 pt-4 text-right font-medium">xxxxxxxxx</td>
+                                        <td class="p-3 pt-4 border-l border-slate-200 pl-4">ภาษีเงินได้บุคคลธรรมดา</td>
+                                        <td class="p-3 pt-4 text-right font-medium">xxxxxxx</td>
+                                    </tr>
+                                    <tr class="border-b border-slate-50">
+                                        <td class="p-3">ค่าครองชีพ</td>
+                                        <td class="p-3 text-right font-medium">xxxxxxxxxx</td>
+                                        <td class="p-3 border-l border-slate-200 pl-4">ประกันสังคม</td>
+                                        <td class="p-3 text-right font-medium">xxxxxx</td>
+                                    </tr>
+                                    <tr class="border-b border-slate-50">
+                                        <td class="p-3">ค่าตำแหน่ง</td>
+                                        <td class="p-3 text-right font-medium">xxxxxxxxxx</td>
+                                        <td class="p-3 border-l border-slate-200 pl-4">กองทุนสำรองเลี้ยงชีพ</td>
+                                        <td class="p-3 text-right font-medium">xxxxx</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 pb-4">ค่าทักษะ</td>
+                                        <td class="p-3 pb-4 text-right font-medium">xxxxxxxx</td>
+                                        <td class="p-3 pb-4 border-l border-slate-200 pl-4">เงินกู้สหกรณ์</td>
+                                        <td class="p-3 pb-4 text-right font-medium">xxxxxx</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="bg-slate-50 border-t border-slate-200 text-slate-800 font-bold">
+                                    <tr>
+                                        <td class="p-3">รวมรายรับ</td>
+                                        <td class="p-3 text-right">xxxxxxxxx</td>
+                                        <td class="p-3 border-l border-slate-200 pl-4">รวมรายการหัก</td>
+                                        <td class="p-3 text-right">xxxxxxx</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <div class="bg-[#eff4ff] p-5 rounded-lg flex flex-col md:flex-row justify-between items-center mb-10 text-center md:text-left gap-4 min-w-[500px]">
+                            <div>
+                                <p class="text-[#3b65f5] font-bold text-[14px]">เงินได้สุทธิ (บาท)</p>
+                                <p class="text-[11px] text-[#3b65f5] mt-1 opacity-80">ตัวอักษร (xxxxxxxxxxxxxxxxxxx)</p>
+                            </div>
+                            <div class="text-[#3b65f5] text-2xl font-bold tracking-widest">XXXXXXXX</div>
+                        </div>
+
+                        <div class="grid grid-cols-2 text-center text-[12px] pb-4 min-w-[500px]">
+                            <div class="flex flex-col items-center">
+                                <p class="text-slate-800 font-medium mb-3">ลายเซ็น1</p>
+                                <p class="text-slate-700 font-medium">( นาย ก )</p>
+                                <p class="text-slate-500 mt-1">ผู้อำนวยการ</p>
+                                <p class="text-slate-500">วันที่ 31/05/2569</p>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <p class="text-slate-800 font-medium mb-3">ลายเซ็น2</p>
+                                <p class="text-slate-700 font-medium">( นาย ข )</p>
+                                <p class="text-slate-500 mt-1">รองผู้อำนวยการ</p>
+                                <p class="text-slate-500">วันที่ 31/05/2569</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 self-start">
+                        
+                        <h3 class="font-bold text-slate-800 mb-1 text-[14px]">ขอสลิปฉบับจริง</h3>
+                        <p class="text-[11px] text-slate-500 mb-6">คุณสามารถขอสลิปเงินเดือนฉบับจริงเพื่อนำไปใช้งานได้</p>
+                        
+                        <p class="text-[12px] font-bold mb-3 text-slate-800">เลือกประเภทลายเซ็น</p>
+                        
+                        <div class="space-y-3 mb-6">
+                            <label id="opt-pdf" class="block border-2 border-[#3b65f5] rounded-lg p-3 cursor-pointer bg-[#eff4ff] transition" onclick="selectAction('pdf')">
+                                <div class="flex items-center gap-3">
+                                    <input type="radio" name="file_type" id="radio-pdf" checked class="w-4 h-4 text-[#3b65f5] focus:ring-[#3b65f5] cursor-pointer">
+                                    <div class="flex-1">
+                                        <p id="text-pdf-1" class="text-[13px] font-bold text-[#3b65f5]">Donwload เป็น PDF</p>
+                                        <p id="text-pdf-2" class="text-[10px] text-[#3b65f5] mt-0.5">โหลดเป็นไฟล์ PDF</p>
+                                    </div>
+                                    <i class="fas fa-file-pdf text-red-500 text-xl"></i>
+                                </div>
+                            </label>
+
+                            <label id="opt-png" class="block border border-slate-200 bg-white rounded-lg p-3 cursor-pointer hover:bg-slate-50 transition" onclick="selectAction('png')">
+                                <div class="flex items-center gap-3">
+                                    <input type="radio" name="file_type" id="radio-png" class="w-4 h-4 text-[#3b65f5] focus:ring-[#3b65f5] cursor-pointer">
+                                    <div class="flex-1">
+                                        <p id="text-png-1" class="text-[13px] font-bold text-slate-700">Donwload เป็น Png</p>
+                                        <p id="text-png-2" class="text-[10px] text-slate-500 mt-0.5">โหลดเป็นไฟล์รูปภาพ</p>
+                                    </div>
+                                    <i class="fas fa-image text-[#3b65f5] text-xl"></i>
+                                </div>
+                            </label>
+                        </div>
+
+                        <p class="text-[12px] font-bold mb-3 text-slate-800">จัดส่งรูปแบบ</p>
+                        
+                        <div id="opt-print" class="border border-slate-200 rounded-lg p-4 flex items-center gap-4 mb-6 bg-white cursor-pointer hover:bg-slate-50 transition" onclick="selectAction('print')">
+                            <div class="w-10 h-10 bg-slate-100 flex items-center justify-center rounded border border-slate-200 text-slate-600 shadow-sm">
+                                <i class="fas fa-print"></i>
+                            </div>
+                            <div>
+                                <p id="text-print-1" class="text-[13px] font-bold text-slate-700">Print</p>
+                                <p id="text-print-2" class="text-[10px] text-slate-500 mt-0.5">ปริ้นเลย</p>
+                            </div>
+                        </div>
+
+                        <div class="text-[10px] text-slate-400 space-y-1.5 mb-6">
+                            <p>หมายเหตุ</p>
+                            <p>• ระยะเวลาดำเนินการ 3-5 วันทำการ</p>
+                            <p>• สามารถติดตามสถานะการขอได้ที่</p>
+                            <p>• ประวัติการขอสลิป</p>
+                        </div>
+
+                        <button id="action-btn" class="w-full bg-[#3b65f5] text-white py-3 rounded-lg text-[13px] font-bold hover:bg-blue-700 transition flex items-center justify-center gap-2 shadow-sm">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // แสดงข้อมูลเมื่อกดดูสลิป
+        function showSlipData() {
+            const yearChecked = document.querySelectorAll('.year-cb:checked').length > 0;
+            const monthChecked = document.querySelectorAll('.month-cb:checked').length > 0;
+
+            if (!yearChecked || !monthChecked) {
+                alert('กรุณาเลือกปีและเดือนที่ต้องการก่อนครับ');
+                return;
+            }
+
+            // ซ่อน Empty State และแสดง Slip Content
+            document.getElementById('empty-state').classList.add('hidden');
+            document.getElementById('slip-content').classList.remove('hidden');
+            
+            // ดึงค่าเดือนล่าสุดที่เลือกมาแสดงผลแบบง่ายๆ (Optional)
+            const firstCheckedMonth = document.querySelector('.month-cb:checked').value;
+            const firstCheckedYear = document.querySelector('.year-cb:checked').value;
+            document.getElementById('slip-date-header').innerText = `เดือน${firstCheckedMonth} ${firstCheckedYear}`;
+        }
+
+        // ฟังก์ชันเปิด/ปิด Sidebar บนมือถือ
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+
+        // ฟังก์ชันอัปเดตข้อความบน Dropdown Multi-select
+        function updateSelection(type) {
+            const checkboxes = document.querySelectorAll(`.${type}-cb:checked`);
+            const displaySpan = document.getElementById(`${type}-display`);
+            
+            let selectedValues = Array.from(checkboxes).map(cb => cb.value);
+            
+            if (selectedValues.length === 0) {
+                displaySpan.innerText = 'เลือก...';
+                displaySpan.classList.add('text-slate-400');
+                displaySpan.classList.remove('text-slate-700');
+            } else if (selectedValues.length <= 2) {
+                displaySpan.innerText = selectedValues.join(', ');
+                displaySpan.classList.remove('text-slate-400');
+                displaySpan.classList.add('text-slate-700');
+            } else {
+                displaySpan.innerText = `เลือก ${selectedValues.length} รายการ`;
+                displaySpan.classList.remove('text-slate-400');
+                displaySpan.classList.add('text-slate-700');
+            }
+        }
+
+        // สคริปต์เพื่อให้ Dropdown ปิดอัตโนมัติเมื่อคลิกพื้นที่อื่น
+        document.addEventListener('click', function(event) {
+            const yearDetails = document.getElementById('year-details');
+            const monthDetails = document.getElementById('month-details');
+            
+            if (yearDetails && !yearDetails.contains(event.target)) {
+                yearDetails.removeAttribute('open');
+            }
+            if (monthDetails && !monthDetails.contains(event.target)) {
+                monthDetails.removeAttribute('open');
+            }
+        });
+
+        // ฟังก์ชันควบคุมการเลือกรูปแบบดาวน์โหลด/Print ทางแผงด้านขวา
+        function selectAction(selectedOption) {
+            const options = ['pdf', 'png', 'print'];
+
+            options.forEach(opt => {
+                const container = document.getElementById(`opt-${opt}`);
+                const text1 = document.getElementById(`text-${opt}-1`);
+                const text2 = document.getElementById(`text-${opt}-2`);
+                const radio = document.getElementById(`radio-${opt}`);
+
+                if (opt === selectedOption) {
+                    container.className = opt === 'print' 
+                        ? 'border-2 border-[#3b65f5] rounded-lg p-4 flex items-center gap-4 mb-6 bg-[#eff4ff] cursor-pointer transition'
+                        : 'block border-2 border-[#3b65f5] rounded-lg p-3 cursor-pointer bg-[#eff4ff] transition';
+                    
+                    text1.classList.remove('text-slate-700');
+                    text1.classList.add('text-[#3b65f5]');
+                    text2.classList.remove('text-slate-500');
+                    text2.classList.add('text-[#3b65f5]');
+                    
+                    if (radio) radio.checked = true;
+                } else {
+                    container.className = opt === 'print'
+                        ? 'border border-slate-200 rounded-lg p-4 flex items-center gap-4 mb-6 bg-white cursor-pointer hover:bg-slate-50 transition'
+                        : 'block border border-slate-200 rounded-lg p-3 cursor-pointer bg-white hover:bg-slate-50 transition';
+                    
+                    text1.classList.add('text-slate-700');
+                    text1.classList.remove('text-[#3b65f5]');
+                    text2.classList.add('text-slate-500');
+                    text2.classList.remove('text-[#3b65f5]');
+                    
+                    if (radio) radio.checked = false;
+                }
+            });
+
+            // ปรับปุ่มให้สอดคล้องกับสิ่งที่กด
+            const actionBtn = document.getElementById('action-btn');
+            if (selectedOption === 'print') {
+                actionBtn.innerHTML = '<i class="fas fa-print"></i> Print';
+            } else {
+                actionBtn.innerHTML = '<i class="fas fa-download"></i> Download';
+            }
+        }
+    </script>
+</body>
+</html>
