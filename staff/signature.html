@@ -11,11 +11,23 @@
         body { font-family: 'Kanit', sans-serif; background-color: #f4f7fa; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* การตั้งค่าสำหรับการพิมพ์ */
+        @media print {
+            aside, header.no-print, .filter-section, .stats-cards, .pagination, .no-print, #selectAll, .checkbox-col {
+                display: none !important;
+            }
+            main { padding: 0; background: white; }
+            .bg-white { border: none !important; box-shadow: none !important; }
+            table { width: 100%; border-collapse: collapse; }
+            th, td { border: 1px solid #e2e8f0; padding: 8px !important; }
+            .status-badge { border: 1px solid #ccc !important; color: black !important; background: none !important; }
+        }
     </style>
 </head>
 <body class="flex flex-col md:flex-row h-screen overflow-hidden text-slate-800 relative">
 
-    <header class="md:hidden h-16 bg-[#1e2b4d] flex items-center px-6 shrink-0 z-30 shadow-sm justify-between">
+    <header class="md:hidden h-16 bg-[#1e2b4d] flex items-center px-6 shrink-0 z-30 shadow-sm justify-between no-print">
         <div class="flex items-center">
             <button onclick="toggleSidebar()" class="text-white text-xl focus:outline-none mr-4 hover:text-slate-300 transition">
                 <i class="fas fa-bars"></i>
@@ -25,9 +37,9 @@
         <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 font-bold flex items-center justify-center text-xs border border-white/20">XX</div>
     </header>
 
-    <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/50 z-40 hidden md:hidden backdrop-blur-sm transition-opacity" onclick="toggleSidebar()"></div>
+    <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/50 z-40 hidden md:hidden backdrop-blur-sm transition-opacity no-print" onclick="toggleSidebar()"></div>
 
-    <aside id="sidebar" class="fixed md:relative inset-y-0 left-0 z-50 w-64 md:w-56 bg-[#25396f] text-white flex flex-col h-full shrink-0 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out shadow-2xl md:shadow-none">
+    <aside id="sidebar" class="fixed md:relative inset-y-0 left-0 z-50 w-64 md:w-56 bg-[#25396f] text-white flex flex-col h-full shrink-0 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out shadow-2xl md:shadow-none no-print">
         <div class="h-16 md:h-20 flex items-center justify-between px-6 shrink-0 mt-2">
             <h1 class="font-bold text-white text-2xl tracking-wide hidden md:block">Logo</h1>
             <h1 class="font-bold text-white text-xl tracking-wide md:hidden">เมนู</h1>
@@ -57,7 +69,7 @@
 
     <main class="flex-1 flex flex-col h-full overflow-hidden bg-[#f4f7fa]">
         
-        <header class="hidden md:flex h-16 bg-white justify-between items-center px-8 z-10 border-b border-slate-200 shadow-sm shrink-0">
+        <header class="hidden md:flex h-16 bg-white justify-between items-center px-8 z-10 border-b border-slate-200 shadow-sm shrink-0 no-print">
             <div>
                 <h1 class="text-[18px] font-bold text-slate-800">คำร้องขอลายเซ็นสลิปเงินเดือน</h1>
             </div>
@@ -73,7 +85,7 @@
         <div class="flex-1 overflow-y-auto p-4 md:p-6">
             <div class="max-w-full mx-auto">
                 
-                <div class="flex flex-wrap items-end gap-3 mb-6 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                <div class="filter-section flex flex-wrap items-end gap-3 mb-6 bg-white p-4 rounded-xl border border-slate-200 shadow-sm no-print">
                     <div>
                         <label class="block text-[12px] text-slate-500 mb-1.5">สถานะ</label>
                         <select class="border border-slate-300 rounded-lg px-3 py-2 text-[13px] focus:outline-none focus:border-blue-500 bg-white w-40">
@@ -83,110 +95,80 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-[12px] text-slate-500 mb-1.5">ช่วงวันที่</label>
+                        <label class="block text-[12px] text-slate-500 mb-1.5">ช่วงวันที่ขอ</label>
                         <div class="relative">
                             <i class="far fa-calendar-alt absolute left-3 top-[10px] text-slate-400 text-[13px]"></i>
-                            <input type="text" value="01/05/2567 - 31/05/2567" class="border border-slate-300 rounded-lg pl-9 pr-8 py-2 text-[13px] focus:outline-none focus:border-blue-500 bg-white w-60 text-slate-700">
-                            <i class="fas fa-chevron-right absolute right-3 top-[13px] text-slate-400 text-[10px]"></i>
+                            <input type="text" value="01/01/2569 - 31/12/2569" class="border border-slate-300 rounded-lg pl-9 pr-8 py-2 text-[13px] focus:outline-none focus:border-blue-500 bg-white w-60 text-slate-700">
                         </div>
                     </div>
-                    <div>
-                        <label class="block text-[12px] text-slate-500 mb-1.5">แผนก</label>
-                        <select class="border border-slate-300 rounded-lg px-3 py-2 text-[13px] focus:outline-none focus:border-blue-500 bg-white w-40">
-                            <option>ทั้งหมด</option>
-                            <option>บัญชีและการเงิน</option>
-                            <option>การตลาด</option>
-                        </select>
-                    </div>
-                    <div class="flex gap-2">
-                        <button class="bg-[#2563eb] text-white px-4 py-2 rounded-lg text-[13px] hover:bg-blue-700 transition flex items-center gap-2 shadow-sm font-medium">
+                    <div class="flex flex-wrap gap-2">
+                        <button class="bg-[#2563eb] text-white px-4 py-2 rounded-lg text-[13px] hover:bg-blue-700 transition flex items-center gap-2 font-medium">
                             <i class="fas fa-search"></i> ค้นหา
                         </button>
-                        <button class="bg-white border border-slate-300 text-slate-600 px-4 py-2 rounded-lg text-[13px] hover:bg-slate-50 transition flex items-center gap-2 shadow-sm font-medium">
+                        <button class="bg-white border border-slate-300 text-slate-600 px-4 py-2 rounded-lg text-[13px] hover:bg-slate-50 transition flex items-center gap-2 font-medium">
                             <i class="fas fa-sync-alt"></i> รีเซ็ต
+                        </button>
+                        <button onclick="window.print()" class="bg-emerald-600 text-white px-4 py-2 rounded-lg text-[13px] hover:bg-emerald-700 transition flex items-center gap-2 font-medium shadow-sm">
+                            <i class="fas fa-print"></i> พิมพ์รายการที่เลือก
                         </button>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div class="stats-cards grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 no-print">
                     <div class="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
                         <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 text-xl"><i class="fas fa-file-alt"></i></div>
                         <div>
                             <div class="text-[12px] text-slate-500">ทั้งหมด</div>
-                            <div class="flex items-baseline gap-1">
-                                <span class="text-2xl font-bold text-slate-800" id="stat-total">0</span>
-                                <span class="text-[13px] font-normal text-slate-500">รายการ</span>
-                            </div>
+                            <div class="flex items-baseline gap-1"><span class="text-2xl font-bold text-slate-800" id="stat-total">0</span><span class="text-[13px] font-normal text-slate-500">รายการ</span></div>
                         </div>
                     </div>
                     <div class="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
                         <div class="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 text-xl"><i class="fas fa-clock"></i></div>
                         <div>
                             <div class="text-[12px] text-slate-500">รอลายเซ็น</div>
-                            <div class="flex items-baseline gap-1">
-                                <span class="text-2xl font-bold text-slate-800" id="stat-pending">0</span>
-                                <span class="text-[13px] font-normal text-slate-500">รายการ</span>
-                            </div>
+                            <div class="flex items-baseline gap-1"><span class="text-2xl font-bold text-slate-800" id="stat-pending">0</span><span class="text-[13px] font-normal text-slate-500">รายการ</span></div>
                         </div>
                     </div>
                     <div class="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
                         <div class="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center text-green-500 text-xl"><i class="fas fa-check-circle"></i></div>
                         <div>
                             <div class="text-[12px] text-slate-500">ลงนามแล้ว</div>
-                            <div class="flex items-baseline gap-1">
-                                <span class="text-2xl font-bold text-slate-800" id="stat-success">0</span>
-                                <span class="text-[13px] font-normal text-slate-500">รายการ</span>
-                            </div>
+                            <div class="flex items-baseline gap-1"><span class="text-2xl font-bold text-slate-800" id="stat-success">0</span><span class="text-[13px] font-normal text-slate-500">รายการ</span></div>
                         </div>
                     </div>
                 </div>
 
                 <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
-                    <div class="p-4 border-b border-slate-100">
+                    <div class="p-4 border-b border-slate-100 flex justify-between items-center no-print">
                         <h2 class="text-[15px] font-bold text-slate-800">รายการคำร้องขอลายเซ็น</h2>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left text-[13px] text-slate-600 whitespace-nowrap">
                             <thead class="bg-slate-50 border-b border-slate-200 text-slate-500">
                                 <tr>
+                                    <th class="px-4 py-4 text-center w-10 no-print checkbox-col">
+                                        <input type="checkbox" id="selectAll" onclick="toggleSelectAll(this)" class="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 cursor-pointer">
+                                    </th>
                                     <th class="px-6 py-4 font-medium text-center w-16">ลำดับ</th>
                                     <th class="px-6 py-4 font-medium">วันที่ขอ</th>
                                     <th class="px-6 py-4 font-medium">ชื่อ-สกุล</th>
                                     <th class="px-6 py-4 font-medium">แผนก</th>
-                                    <th class="px-6 py-4 font-medium">เดือน/ปี</th>
-                                    <th class="px-6 py-4 font-medium">ประเภทลายเซ็น</th>
+                                    <th class="px-6 py-4 font-medium">ช่วงเดือน/ปี (สลิปเงินเดือน)</th>
                                     <th class="px-6 py-4 font-medium text-center">สถานะ</th>
-                                    <th class="px-6 py-4 font-medium text-center">จัดการ</th>
+                                    <th class="px-6 py-4 font-medium text-center no-print">จัดการ</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-slate-100" id="tableBody">
                                 </tbody>
                         </table>
                     </div>
-                    
-                    <div class="p-4 border-t border-slate-100 flex justify-between items-center text-[12px] text-slate-500 bg-white">
-                        <div id="table-info">แสดง 1 - 7 จาก 7 รายการ</div>
-                        <div class="flex gap-2 items-center">
-                            <div class="flex gap-1">
-                                <button class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded hover:bg-slate-50 text-slate-400 transition"><i class="fas fa-chevron-left text-[10px]"></i></button>
-                                <button class="w-8 h-8 flex items-center justify-center bg-[#2563eb] text-white rounded shadow-sm font-medium">1</button>
-                                <button class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded hover:bg-slate-50 transition">2</button>
-                                <button class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded hover:bg-slate-50 transition">3</button>
-                                <button class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded hover:bg-slate-50 text-slate-400 transition"><i class="fas fa-chevron-right text-[10px]"></i></button>
-                            </div>
-                            <select class="border border-slate-200 rounded px-2 py-1.5 focus:outline-none bg-white">
-                                <option>10 / หน้า</option>
-                            </select>
-                        </div>
-                    </div>
                 </div>
 
-                <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 mb-8">
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 mb-8 no-print">
                     <h3 class="font-bold text-slate-800 text-[14px] mb-3">หมายเหตุ</h3>
                     <ul class="list-disc list-inside text-[12px] text-slate-500 space-y-1.5">
                         <li>คำร้องขอลายเซ็นจะถูกส่งจากระบบสลิปเงินเดือนเมื่อผู้ใช้กด "ขอสลิปฉบับจริง"</li>
                         <li>กรุณาตรวจสอบลายเซ็นและเปลี่ยนแปลงหากจำเป็น</li>
-                        <li>หลังจากบันทึกการเปลี่ยนแปลง ลายเซ็นใหม่จะถูกใช้กับสลิปเงินเดือนฉบับถัดไป</li>
                     </ul>
                 </div>
 
@@ -195,7 +177,6 @@
     </main>
 
     <script>
-        // ฟังก์ชันเปิด/ปิด Sidebar บนมือถือ
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebar-overlay');
@@ -203,48 +184,38 @@
             overlay.classList.toggle('hidden');
         }
 
-        // ข้อมูลจำลอง 
+        // ปรับปรุง Mock Data ให้บอกช่วงเดือนและปี
         let mockData = [
-            { date: '20/05/2567', name: 'นางสาวศิริวรรณ จันทร์ดี', dept: 'บัญชีและการเงิน', month: 'เมษายน 2567', type: 'ลายเซ็นแบบปากกา', status: 'pending' },
-            { date: '20/05/2567', name: 'นายกฤษฎา พงศ์พัฒน์', dept: 'การตลาด', month: 'เมษายน 2567', type: 'ลายเซ็นแบบปากกา', status: 'pending' },
-            { date: '19/05/2567', name: 'นางสาวจิราภรณ์ มณีวงศ์', dept: 'ทรัพยากรบุคคล', month: 'เมษายน 2567', type: 'ลายเซ็นแบบปากกา', status: 'success' },
-            { date: '19/05/2567', name: 'นายธนวัฒน์ เจริญกิจ', dept: 'วิศวกรรม', month: 'เมษายน 2567', type: 'ลายเซ็นแบบปากกา', status: 'success' },
-            { date: '18/05/2567', name: 'นางสาววรัญญา แสงทอง', dept: 'อำนวยการ', month: 'เมษายน 2567', type: 'ลายเซ็นแบบปากกา', status: 'pending' },
-            { date: '17/05/2567', name: 'นางสาวธิดารัตน์ อินทร์คำ', dept: 'จัดซื้อ', month: 'เมษายน 2567', type: 'ลายเซ็นแบบปากกา', status: 'success' },
-            { date: '17/05/2567', name: 'นายวัชรพล กลิ่นหอม', dept: 'สนับสนุน', month: 'เมษายน 2567', type: 'ลายเซ็นแบบปากกา', status: 'success' }
+            { date: '20/05/2569', name: 'นางสาวศิริวรรณ จันทร์ดี', dept: 'บัญชีและการเงิน', period: 'มกราคม 2569 ถึง เมษายน 2569', status: 'pending' },
+            { date: '20/05/2569', name: 'นายกฤษฎา พงศ์พัฒน์', dept: 'การตลาด', period: 'กุมภาพันธ์ 2569 ถึง พฤษภาคม 2569', status: 'pending' },
+            { date: '19/05/2569', name: 'นางสาวจิราภรณ์ มณีวงศ์', dept: 'ทรัพยากรบุคคล', period: 'มกราคม 2569 ถึง มีนาคม 2569', status: 'success' },
+            { date: '19/05/2569', name: 'นายธนวัฒน์ เจริญกิจ', dept: 'วิศวกรรม', period: 'เมษายน 2568 ถึง มกราคม 2569', status: 'success' },
+            { date: '18/05/2569', name: 'นางสาววรัญญา แสงทอง', dept: 'อำนวยการ', period: 'มกราคม 2569 ถึง มีนาคม 2569', status: 'pending' },
+            { date: '17/05/2569', name: 'นางสาวธิดารัตน์ อินทร์คำ', dept: 'จัดซื้อ', period: 'มิถุนายน 2568 ถึง สิงหาคม 2568', status: 'success' }
         ];
 
-        // ฟังก์ชันสลับสถานะเมื่อกดปุ่มเปลี่ยนสถานะ
-        function toggleStatus(index) {
-            if (mockData[index].status === 'pending') {
-                mockData[index].status = 'success';
-            } else {
-                mockData[index].status = 'pending';
+        function toggleSelectAll(master) {
+            const checkboxes = document.getElementsByClassName('row-checkbox');
+            for (let i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = master.checked;
             }
+        }
+
+        function toggleStatus(index) {
+            mockData[index].status = mockData[index].status === 'pending' ? 'success' : 'pending';
             renderTable();
             updateStats();
         }
 
-        // อัปเดตตัวเลขสถิติบนการ์ด
         function updateStats() {
             const total = mockData.length;
             const pending = mockData.filter(d => d.status === 'pending').length;
             const success = mockData.filter(d => d.status === 'success').length;
-
             document.getElementById('stat-total').innerText = total;
             document.getElementById('stat-pending').innerText = pending;
             document.getElementById('stat-success').innerText = success;
-            document.getElementById('table-info').innerText = `แสดง 1 - ${total} จาก ${total} รายการ`;
         }
 
-        // ออกแบบป้ายสถานะ
-        function getStatusBadge(status) {
-            if(status === 'success') return `<span class="bg-green-50 text-green-600 border border-green-200 px-3 py-1 rounded text-[11px] font-medium inline-block w-24 text-center transition-colors">ลงนามแล้ว</span>`;
-            if(status === 'pending') return `<span class="bg-orange-50 text-orange-600 border border-orange-200 px-3 py-1 rounded text-[11px] font-medium inline-block w-24 text-center transition-colors">รอลายเซ็น</span>`;
-            return '';
-        }
-
-        // เรนเดอร์ตาราง
         function renderTable() {
             const tbody = document.getElementById('tableBody');
             tbody.innerHTML = '';
@@ -253,16 +224,22 @@
                 const tr = document.createElement('tr');
                 tr.className = 'hover:bg-slate-50 transition-colors';
                 tr.innerHTML = `
+                    <td class="px-4 py-4 text-center no-print checkbox-col">
+                        <input type="checkbox" class="row-checkbox w-4 h-4 rounded border-slate-300 text-blue-600 cursor-pointer">
+                    </td>
                     <td class="px-6 py-4 text-center text-slate-500">${index + 1}</td>
                     <td class="px-6 py-4 text-slate-500">${row.date}</td>
                     <td class="px-6 py-4 font-medium text-slate-700">${row.name}</td>
                     <td class="px-6 py-4">${row.dept}</td>
-                    <td class="px-6 py-4">${row.month}</td>
-                    <td class="px-6 py-4 text-slate-500">${row.type}</td>
-                    <td class="px-6 py-4 text-center">${getStatusBadge(row.status)}</td>
+                    <td class="px-6 py-4 font-medium text-blue-700">${row.period}</td>
                     <td class="px-6 py-4 text-center">
-                        <button onclick="toggleStatus(${index})" class="px-3 py-1.5 rounded border border-blue-200 text-[#2563eb] hover:bg-blue-50 transition flex items-center justify-center mx-auto gap-1.5 text-[11px] font-medium shadow-sm">
-                            <i class="fas fa-exchange-alt"></i> เปลี่ยนสถานะ
+                        <span class="status-badge ${row.status === 'success' ? 'bg-green-50 text-green-600 border border-green-200' : 'bg-orange-50 text-orange-600 border border-orange-200'} px-3 py-1 rounded text-[11px] font-medium inline-block w-24 text-center">
+                            ${row.status === 'success' ? 'ลงนามแล้ว' : 'รอลายเซ็น'}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-center no-print">
+                        <button onclick="toggleStatus(${index})" class="px-3 py-1.5 rounded border border-blue-200 text-[#2563eb] hover:bg-blue-50 transition text-[11px] font-medium">
+                            เปลี่ยนสถานะ
                         </button>
                     </td>
                 `;
@@ -270,7 +247,6 @@
             });
         }
 
-        // Initialize ตอนโหลดหน้าเว็บ
         window.onload = function() {
             renderTable();
             updateStats();
