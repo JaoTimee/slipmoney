@@ -44,49 +44,59 @@
     </aside>
 
     <main class="flex-1 flex flex-col h-full overflow-hidden">
-        <header class="hidden md:flex h-16 bg-white border-b border-gray-200 px-6 py-4 justify-between items-center shrink-0">
-            <div>
-                <h1 class="text-xl font-semibold text-gray-800">รายการสลิปเงินเดือน</h1>
-            </div>
-            <a href="profile.html" class="flex items-center gap-3 cursor-pointer p-2 rounded-lg hover:bg-slate-50 transition border border-slate-100">
+        <header class="h-16 bg-white border-b border-gray-100 px-8 flex justify-between items-center shrink-0">
+            <h1 class="text-lg font-bold text-slate-800">จัดการลายเซ็น</h1>
+             <a href="profile.html" class="flex items-center gap-3 cursor-pointer p-2 rounded-lg hover:bg-slate-50 transition border border-slate-100">
                 <div class="w-8 h-8 rounded-full bg-orange-500 text-white font-bold flex items-center justify-center text-xs shadow-sm">KK</div>
                 <div class="leading-tight">
                     <p class="text-[13px] font-bold text-slate-800">นายก กา</p>
-                    <p class="text-[10px] text-slate-500">Admin</p>
+                    <p class="text-[10px] text-slate-500">Staff</p>
                 </div>
             </a>
         </header>
 
         <div class="flex-1 overflow-y-auto p-4 md:p-8">
-            <div class="max-w-6xl mx-auto">
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                    <div class="p-5 border-b border-gray-50"><h2 class="font-bold text-slate-800">ตารางรายชื่อ</h2></div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-[13px]">
-                            <thead class="text-slate-400 bg-slate-50/50">
-                                <tr>
-                                    <th class="px-6 py-4 text-center">ชื่อ-สกุล</th>
-                                    <th class="px-6 py-4 text-center">ตำแหน่ง</th>
-                                    <th class="px-6 py-4 text-center">ลายเซ็นปัจจุบัน</th>
-                                    <th class="px-6 py-4 text-center">จัดการ</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-100">
-                                <tr class="hover:bg-slate-50 transition">
-                                    <td class="px-6 py-6 text-center font-medium">นาย ก ไก่</td>
-                                    <td class="px-6 py-6 text-center text-slate-500">ผอ.กองช่าง</td>
-                                    <td class="px-6 py-2 flex justify-center">
-                                        <img id="sig-target-1" src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Signature_of_John_Hancock.svg" class="h-12 w-auto opacity-70 mix-blend-multiply transition-transform duration-300">
-                                    </td>
-                                    <td class="px-6 py-6 text-center">
-                                        <button onclick="openModal('sig-target-1')" class="inline-flex items-center gap-1.5 px-4 py-2 border border-blue-400 text-blue-600 rounded-lg hover:bg-blue-50 transition text-[11px] font-medium">
-                                            <i class="far fa-edit"></i> แก้ไขลายเซ็น
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+            <div class="max-w-5xl mx-auto">
+                <h2 class="font-bold text-slate-800 mb-6 flex items-center gap-2 text-xl">
+                    <i class="fas fa-file-signature text-blue-600"></i> ผู้มีอำนาจลงนาม
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col group hover:border-blue-300 transition-all">
+                        <div class="p-4 bg-slate-50 flex justify-between items-center border-b border-slate-100">
+                            <span class="text-[12px] font-bold text-slate-500 uppercase">ตำแหน่ง: ผู้อำนวยการ</span>
+                            <button onclick="openModal('sig-target-1')" class="px-3 py-1 bg-white border border-blue-400 text-blue-600 rounded-md text-[11px] font-bold hover:bg-blue-50 transition">
+                                <i class="far fa-edit mr-1"></i>แก้ไขลายเซ็น
+                            </button>
+                        </div>
+                        <div class="flex-1 min-h-[220px] flex items-center justify-center bg-white p-8">
+                            <img id="sig-target-1" src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Signature_of_John_Hancock.svg" 
+                                 class="max-h-32 w-auto opacity-80 mix-blend-multiply transition-transform duration-300">
+                        </div>
+                        <div class="p-5 text-center bg-slate-50/50 border-t border-slate-100">
+                            <h3 class="text-lg font-bold text-slate-800">นาย ก ไก่</h3>
+                            <p class="text-sm text-slate-500 italic">ผู้อำนวยการกองช่าง</p>
+                        </div>
                     </div>
+
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col group hover:border-blue-300 transition-all">
+                        <div class="p-4 bg-slate-50 flex justify-between items-center border-b border-slate-100">
+                            <span class="text-[12px] font-bold text-slate-500 uppercase">ตำแหน่ง: การเงิน</span>
+                            <button onclick="openModal('sig-target-2')" class="px-3 py-1 bg-white border border-blue-400 text-blue-600 rounded-md text-[11px] font-bold hover:bg-blue-50 transition">
+                                <i class="far fa-edit mr-1"></i>แก้ไขลายเซ็น
+                            </button>
+                        </div>
+                        <div class="flex-1 min-h-[220px] flex items-center justify-center bg-white p-8">
+                            <img id="sig-target-2" src="https://upload.wikimedia.org/wikipedia/commons/8/84/Signature_of_George_Washington.svg" 
+                                 class="max-h-32 w-auto opacity-80 mix-blend-multiply transition-transform duration-300">
+                        </div>
+                        <div class="p-5 text-center bg-slate-50/50 border-t border-slate-100">
+                            <h3 class="text-lg font-bold text-slate-800">นางสาว ข ไข่</h3>
+                            <p class="text-sm text-slate-500 italic">เจ้าหน้าที่การเงิน</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -106,7 +116,6 @@
             </div>
 
             <div class="p-6 min-h-[280px]">
-                
                 <div id="content-saved" class="space-y-3">
                     <p class="text-[11px] text-slate-500 mb-2">เลือกลายเซ็นที่คุณเคยใช้งานล่าสุด:</p>
                     <div class="grid grid-cols-2 gap-3">
@@ -160,7 +169,7 @@
         function openModal(targetId) {
             currentTargetId = targetId;
             document.getElementById('modalOverlay').classList.remove('hidden');
-            switchTab('saved'); // เริ่มต้นที่แท็บบันทึกไว้
+            switchTab('saved'); 
         }
 
         function closeModal() {
@@ -182,7 +191,6 @@
                 btn.classList.toggle('text-slate-400', t !== tab);
                 btn.classList.toggle('font-medium', t !== tab);
             });
-
             if (tab === 'draw') setTimeout(initCanvas, 100);
         }
 
@@ -217,7 +225,6 @@
             };
 
             const stop = () => isDrawing = false;
-
             canvas.onmousedown = start;
             canvas.onmousemove = move;
             window.onmouseup = stop;
@@ -248,28 +255,21 @@
 
         function applySignature() {
             const targetImg = document.getElementById(currentTargetId);
-            
             if (activeTab === 'saved') {
-                // จากรายการที่บันทึกไว้
                 const selected = document.querySelector('input[name="saved_sig"]:checked');
                 targetImg.src = selected.value;
             } 
             else if (activeTab === 'draw') {
-                // จากการวาด
                 if (!hasDrawn) return alert('กรุณาวาดลายเซ็นก่อนครับ');
                 targetImg.src = canvas.toDataURL();
             } 
             else if (activeTab === 'upload') {
-                // จากการอัปโหลด
                 const uploadImg = document.getElementById('imgPreview');
                 if (!uploadImg.src) return alert('กรุณาเลือกไฟล์ก่อนครับ');
                 targetImg.src = uploadImg.src;
             }
-
-            // เพิ่ม Animation เล็กน้อยเมื่อบันทึกเสร็จ
             targetImg.style.transform = 'scale(1.2)';
             setTimeout(() => targetImg.style.transform = 'scale(1)', 300);
-            
             closeModal();
         }
     </script>
