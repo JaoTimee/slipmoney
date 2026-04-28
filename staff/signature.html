@@ -85,6 +85,30 @@
         <div class="flex-1 overflow-y-auto p-4 md:p-6">
             <div class="max-w-full mx-auto">
                 
+                 <div class="stats-cards grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 no-print">
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
+                        <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 text-xl"><i class="fas fa-file-alt"></i></div>
+                        <div>
+                            <div class="text-[12px] text-slate-500">ทั้งหมด</div>
+                            <div class="flex items-baseline gap-1"><span class="text-2xl font-bold text-slate-800" id="stat-total">0</span><span class="text-[13px] font-normal text-slate-500">รายการ</span></div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
+                        <div class="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 text-xl"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <div class="text-[12px] text-slate-500">รอลายเซ็น</div>
+                            <div class="flex items-baseline gap-1"><span class="text-2xl font-bold text-slate-800" id="stat-pending">0</span><span class="text-[13px] font-normal text-slate-500">รายการ</span></div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
+                        <div class="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center text-green-500 text-xl"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <div class="text-[12px] text-slate-500">ลงนามแล้ว</div>
+                            <div class="flex items-baseline gap-1"><span class="text-2xl font-bold text-slate-800" id="stat-success">0</span><span class="text-[13px] font-normal text-slate-500">รายการ</span></div>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="filter-section flex flex-wrap items-end gap-3 mb-6 bg-white p-4 rounded-xl border border-slate-200 shadow-sm no-print">
                     <div>
                         <label class="block text-[12px] text-slate-500 mb-1.5">สถานะ</label>
@@ -114,29 +138,7 @@
                     </div>
                 </div>
 
-                <div class="stats-cards grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 no-print">
-                    <div class="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
-                        <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 text-xl"><i class="fas fa-file-alt"></i></div>
-                        <div>
-                            <div class="text-[12px] text-slate-500">ทั้งหมด</div>
-                            <div class="flex items-baseline gap-1"><span class="text-2xl font-bold text-slate-800" id="stat-total">0</span><span class="text-[13px] font-normal text-slate-500">รายการ</span></div>
-                        </div>
-                    </div>
-                    <div class="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
-                        <div class="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 text-xl"><i class="fas fa-clock"></i></div>
-                        <div>
-                            <div class="text-[12px] text-slate-500">รอลายเซ็น</div>
-                            <div class="flex items-baseline gap-1"><span class="text-2xl font-bold text-slate-800" id="stat-pending">0</span><span class="text-[13px] font-normal text-slate-500">รายการ</span></div>
-                        </div>
-                    </div>
-                    <div class="bg-white p-5 rounded-xl border border-slate-200 flex items-center gap-4 shadow-sm">
-                        <div class="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center text-green-500 text-xl"><i class="fas fa-check-circle"></i></div>
-                        <div>
-                            <div class="text-[12px] text-slate-500">ลงนามแล้ว</div>
-                            <div class="flex items-baseline gap-1"><span class="text-2xl font-bold text-slate-800" id="stat-success">0</span><span class="text-[13px] font-normal text-slate-500">รายการ</span></div>
-                        </div>
-                    </div>
-                </div>
+               
 
                 <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-6">
                     <div class="p-4 border-b border-slate-100 flex justify-between items-center no-print">
