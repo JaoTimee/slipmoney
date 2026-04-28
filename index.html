@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome Back - Login</title>
+    <title>Welcome Back - Login System</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -12,9 +12,7 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Kanit', 'sans-serif'],
-                    },
+                    fontFamily: { sans: ['Kanit', 'sans-serif'] },
                     colors: {
                         brand: {
                             bg: '#254eb6',      
@@ -30,43 +28,10 @@
     </script>
 
     <style>
-        body {
-            background-color: #254eb6;
-            overflow: hidden;
-        }
-        
-        .blob-tl {
-            position: absolute;
-            top: -100px;
-            left: -100px;
-            width: 400px;
-            height: 400px;
-            background-color: #1a3c9b;
-            border-radius: 50%;
-            z-index: 0;
-        }
-        
-        .blob-bl {
-            position: absolute;
-            bottom: -50px;
-            left: -50px;
-            width: 300px;
-            height: 300px;
-            background-color: #1a3c9b;
-            border-radius: 50%;
-            z-index: 0;
-        }
-
-        .blob-br {
-            position: absolute;
-            bottom: -100px;
-            right: -50px;
-            width: 500px;
-            height: 400px;
-            background-color: #1a3c9b;
-            border-radius: 40% 60% 0 0;
-            z-index: 0;
-        }
+        body { background-color: #254eb6; overflow: hidden; }
+        .blob-tl { position: absolute; top: -100px; left: -100px; width: 400px; height: 400px; background-color: #1a3c9b; border-radius: 50%; z-index: 0; }
+        .blob-bl { position: absolute; bottom: -50px; left: -50px; width: 300px; height: 300px; background-color: #1a3c9b; border-radius: 50%; z-index: 0; }
+        .blob-br { position: absolute; bottom: -100px; right: -50px; width: 500px; height: 400px; background-color: #1a3c9b; border-radius: 40% 60% 0 0; z-index: 0; }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen text-white relative">
@@ -108,14 +73,17 @@
                         </button>
                     </div>
 
-                    <button type="submit" 
-                        class="w-full bg-brand-btn hover:bg-brand-btn_hover text-white font-medium py-3.5 rounded transition duration-200 text-[15px] shadow-lg mb-4">
+                    <button type="submit" class="w-full bg-brand-btn hover:bg-brand-btn_hover text-white font-medium py-3.5 rounded transition duration-200 text-[15px] shadow-lg mb-4">
                         เข้าสู่ระบบ
                     </button>
 
-                    <div class="text-center">
+                    <div class="text-center flex justify-center items-center gap-3">
                         <button type="button" onclick="switchView('reset')" class="text-[12px] text-blue-200 hover:text-white transition focus:outline-none underline decoration-blue-200/50 underline-offset-2">
                             เปลี่ยนรหัสผ่าน?
+                        </button>
+                        <span class="text-blue-300/30 text-xs">|</span>
+                        <button type="button" onclick="switchView('forgot')" class="text-[12px] text-blue-200 hover:text-white transition focus:outline-none underline decoration-blue-200/50 underline-offset-2">
+                            ลืมรหัสผ่าน?
                         </button>
                     </div>
                 </form>
@@ -129,39 +97,39 @@
                     <div id="resetErrorMessage" class="hidden bg-red-500/20 border border-red-500/50 text-red-200 text-sm px-4 py-2 rounded-lg mb-4 text-center">
                         Username หรือรหัสผ่านเดิมไม่ถูกต้อง
                     </div>
-
                     <div class="mb-4">
-                        <input type="text" id="resetUsername" required
-                            class="w-full px-4 py-3.5 rounded bg-[#f8f9fa] text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400"
-                            placeholder="Username">
+                        <input type="text" id="resetUsername" required class="w-full px-4 py-3.5 rounded bg-[#f8f9fa] text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400" placeholder="Username">
                     </div>
-
                     <div class="relative mb-4">
-                        <input type="password" id="oldPassword" required
-                            class="w-full px-4 py-3.5 rounded bg-[#f8f9fa] text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 pr-12"
-                            placeholder="รหัสผ่านเดิม (Old Password)">
-                        <button type="button" onclick="togglePassword('oldPassword', 'eyeIconOld')" class="absolute right-4 top-[14px] text-gray-400 hover:text-gray-600 focus:outline-none">
-                            <i id="eyeIconOld" class="fas fa-eye"></i>
-                        </button>
+                        <input type="password" id="oldPassword" required class="w-full px-4 py-3.5 rounded bg-[#f8f9fa] text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 pr-12" placeholder="รหัสผ่านเดิม">
+                        <button type="button" onclick="togglePassword('oldPassword', 'eyeIconOld')" class="absolute right-4 top-[14px] text-gray-400"><i id="eyeIconOld" class="fas fa-eye"></i></button>
                     </div>
-
                     <div class="relative mb-6">
-                        <input type="password" id="newPassword" required minlength="4"
-                            class="w-full px-4 py-3.5 rounded bg-[#f8f9fa] text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 pr-12"
-                            placeholder="รหัสผ่านใหม่ (New Password)">
-                        <button type="button" onclick="togglePassword('newPassword', 'eyeIconNew')" class="absolute right-4 top-[14px] text-gray-400 hover:text-gray-600 focus:outline-none">
-                            <i id="eyeIconNew" class="fas fa-eye"></i>
-                        </button>
+                        <input type="password" id="newPassword" required minlength="4" class="w-full px-4 py-3.5 rounded bg-[#f8f9fa] text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 pr-12" placeholder="รหัสผ่านใหม่">
+                        <button type="button" onclick="togglePassword('newPassword', 'eyeIconNew')" class="absolute right-4 top-[14px] text-gray-400"><i id="eyeIconNew" class="fas fa-eye"></i></button>
+                    </div>
+                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-3.5 rounded transition duration-200 text-[15px] shadow-lg mb-4">บันทึกรหัสผ่านใหม่</button>
+                    <div class="text-center"><button type="button" onclick="switchView('login')" class="text-[12px] text-white underline decoration-white/50 underline-offset-2">กลับไปหน้าเข้าสู่ระบบ</button></div>
+                </form>
+            </div>
+
+            <div id="forgotSection" class="hidden transition-opacity duration-300">
+                <h2 class="text-center text-2xl font-bold tracking-wide mb-2">FORGOT PASSWORD</h2>
+                <p class="text-center text-[11px] text-blue-100 mb-8">ระบุ Email ของคุณเพื่อรับลิงก์กู้คืนรหัสผ่าน</p>
+
+                <form id="forgotForm" onsubmit="handleForgotPassword(event)">
+                    <div class="mb-6">
+                        <input type="email" id="forgotEmail" required
+                            class="w-full px-4 py-3.5 rounded bg-[#f8f9fa] text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400"
+                            placeholder="ระบุ Gmail ของคุณ (เช่น example@gmail.com)">
                     </div>
 
-                    <button type="submit" 
-                        class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-3.5 rounded transition duration-200 text-[15px] shadow-lg mb-4">
-                        บันทึกรหัสผ่านใหม่
+                    <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-3.5 rounded transition duration-200 text-[15px] shadow-lg mb-4">
+                        ส่งลิงก์กู้คืนรหัสผ่าน
                     </button>
 
-                    <div class="text-center flex justify-center gap-2 text-[12px] text-blue-200">
-                        <span>มีรหัสผ่านแล้ว?</span>
-                        <button type="button" onclick="switchView('login')" class="text-white hover:text-blue-100 font-medium transition focus:outline-none underline decoration-white/50 underline-offset-2">
+                    <div class="text-center">
+                        <button type="button" onclick="switchView('login')" class="text-[12px] text-white underline decoration-white/50 underline-offset-2">
                             กลับไปหน้าเข้าสู่ระบบ
                         </button>
                     </div>
@@ -172,14 +140,12 @@
 
         <div class="text-center mt-8">
             <p class="text-[10px] text-blue-200/70 italic">
-                เริ่มต้น: Admin: admin | Staff: staff | User: user | Superadmin: superadmin (Pass เริ่มต้น: 1234)
+                เริ่ม: Admin: admin | Staff: staff | User: user | Superadmin: superadmin (Pass: 1234)
             </p>
         </div>
     </div>
 
     <script>
-        // เพิ่มลิงก์ปลายทาง (url) เข้าไปในฐานข้อมูลจำลอง
-        // *** หมายเหตุ: คุณต้องสร้างไฟล์ HTML ชื่อตามนี้ไว้ในโฟลเดอร์เดียวกันด้วยเพื่อให้มันกระโดดไปได้จริง ***
         const mockDatabase = {
             'admin': { password: '1234', role: 'ผู้ดูแลระบบ (Admin)', url: 'admin/data.html' },
             'staff': { password: '1234', role: 'เจ้าหน้าที่ (Staff)', url: 'staff/data.html' },
@@ -188,43 +154,34 @@
         };
 
         function switchView(viewName) {
-            const loginSection = document.getElementById('loginSection');
-            const resetSection = document.getElementById('resetSection');
-
+            const sections = ['loginSection', 'resetSection', 'forgotSection'];
+            sections.forEach(id => document.getElementById(id).classList.add('hidden'));
+            
             document.getElementById('loginForm').reset();
             document.getElementById('resetForm').reset();
+            document.getElementById('forgotForm').reset();
+            
             document.getElementById('loginErrorMessage').classList.add('hidden');
             document.getElementById('resetErrorMessage').classList.add('hidden');
 
-            resetPasswordEyeIcon('password', 'eyeIconLogin');
-            resetPasswordEyeIcon('oldPassword', 'eyeIconOld');
-            resetPasswordEyeIcon('newPassword', 'eyeIconNew');
-
             if (viewName === 'reset') {
-                loginSection.classList.add('hidden');
-                resetSection.classList.remove('hidden');
+                document.getElementById('resetSection').classList.remove('hidden');
+            } else if (viewName === 'forgot') {
+                document.getElementById('forgotSection').classList.remove('hidden');
             } else {
-                resetSection.classList.add('hidden');
-                loginSection.classList.remove('hidden');
+                document.getElementById('loginSection').classList.remove('hidden');
             }
         }
 
         function handleLogin(event) {
             event.preventDefault();
-
             const userVal = document.getElementById('username').value.trim().toLowerCase();
             const passVal = document.getElementById('password').value;
             const errorBox = document.getElementById('loginErrorMessage');
 
             if (mockDatabase[userVal] && mockDatabase[userVal].password === passVal) {
-                errorBox.classList.add('hidden');
-                
-                // แจ้งเตือนก่อนเข้า
-                alert(`✅ เข้าสู่ระบบสำเร็จ!\n\nกำลังพาท่านเข้าสู่ระบบในสิทธิ์: ${mockDatabase[userVal].role}`);
-                
-                // คำสั่งที่ทำให้กระโดดไปหน้าอื่น ตาม url ที่ตั้งไว้ใน mockDatabase
+                alert(`✅ เข้าสู่ระบบสำเร็จ!\nสิทธิ์: ${mockDatabase[userVal].role}`);
                 window.location.href = mockDatabase[userVal].url;
-
             } else {
                 errorBox.classList.remove('hidden');
                 document.getElementById('password').value = ''; 
@@ -233,44 +190,36 @@
 
         function handleChangePassword(event) {
             event.preventDefault();
-
             const userVal = document.getElementById('resetUsername').value.trim().toLowerCase();
             const oldPass = document.getElementById('oldPassword').value;
             const newPass = document.getElementById('newPassword').value;
-            const errorBox = document.getElementById('resetErrorMessage');
 
             if (mockDatabase[userVal] && mockDatabase[userVal].password === oldPass) {
                 mockDatabase[userVal].password = newPass;
-                errorBox.classList.add('hidden');
-                
-                alert(`✅ เปลี่ยนรหัสผ่านของบัญชี "${userVal}" สำเร็จ!\nกรุณาเข้าสู่ระบบด้วยรหัสผ่านใหม่`);
+                alert(`✅ เปลี่ยนรหัสผ่านของ "${userVal}" สำเร็จ!`);
                 switchView('login');
-
             } else {
-                errorBox.classList.remove('hidden');
+                document.getElementById('resetErrorMessage').classList.remove('hidden');
             }
+        }
+
+        function handleForgotPassword(event) {
+            event.preventDefault();
+            const email = document.getElementById('forgotEmail').value;
+            alert(`📧 ระบบได้ส่งลิงก์ตั้งค่ารหัสผ่านใหม่ไปยัง:\n${email}\n\nกรุณาตรวจสอบในกล่องจดหมายของคุณ`);
+            switchView('login');
         }
 
         function togglePassword(inputId, iconId) {
-            const passInput = document.getElementById(inputId);
-            const eyeIcon = document.getElementById(iconId);
-            
-            if (passInput.type === 'password') {
-                passInput.type = 'text';
-                eyeIcon.classList.remove('fa-eye');
-                eyeIcon.classList.add('fa-eye-slash');
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
             } else {
-                passInput.type = 'password';
-                eyeIcon.classList.remove('fa-eye-slash');
-                eyeIcon.classList.add('fa-eye');
+                input.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
             }
-        }
-
-        function resetPasswordEyeIcon(inputId, iconId) {
-            document.getElementById(inputId).type = 'password';
-            const eyeIcon = document.getElementById(iconId);
-            eyeIcon.classList.remove('fa-eye-slash');
-            eyeIcon.classList.add('fa-eye');
         }
     </script>
 </body>
