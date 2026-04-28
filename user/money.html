@@ -11,10 +11,10 @@
         body { font-family: 'Kanit', sans-serif; background-color: #f4f7fa; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        /* ซ่อนลูกศร default ของ details/summary */
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="flex flex-col md:flex-row h-screen overflow-hidden text-slate-800 relative">
@@ -43,7 +43,7 @@
         </div>
 
         <nav class="flex-1 overflow-y-auto no-scrollbar px-4 space-y-2 mt-2 md:mt-4">
-            <a href="#" class="flex items-center gap-3 px-4 py-3 bg-[#3b65f5] text-white rounded-lg transition text-[13px] font-medium shadow-md">
+            <a href="money.html" class="flex items-center gap-3 px-4 py-3 bg-[#3b65f5] text-white rounded-lg transition text-[13px] font-medium shadow-md">
                 <i class="fas fa-pen-nib w-4 text-center"></i> ลายเซ็นอิเล็กทรอนิกส์
             </a>
             <a href="signnature.html" class="flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white/80 hover:text-white rounded-lg transition text-[13px]">
@@ -65,7 +65,7 @@
                 <img src="https://ui-avatars.com/api/?name=K+K&background=f97316&color=fff&rounded=true" alt="Profile" class="w-9 h-9 rounded-full object-cover">
                 <div class="leading-tight">
                     <p class="text-[13px] font-bold text-slate-800">นางสาว ก ไก่</p>
-                    <p class="text-[10px] text-slate-500">รหัสพนักงาน : xxxxxx</p>
+                    <p class="text-[10px] text-slate-500">รหัสพนักงาน : 0012345</p>
                 </div>
             </a>
         </header>
@@ -86,13 +86,13 @@
                             </summary>
                             <div class="absolute z-30 w-full mt-1 bg-white border border-slate-200 rounded-lg shadow-lg max-h-48 overflow-y-auto p-1.5 space-y-1">
                                 <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
-                                    <input type="checkbox" value="2569" checked class="year-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('year')"> 2569
+                                    <input type="radio" name="year" value="2569" checked class="year-rd border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('year')"> 2569
                                 </label>
                                 <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
-                                    <input type="checkbox" value="2568" class="year-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('year')"> 2568
+                                    <input type="radio" name="year" value="2568" class="year-rd border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('year')"> 2568
                                 </label>
                                 <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
-                                    <input type="checkbox" value="2567" class="year-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('year')"> 2567
+                                    <input type="radio" name="year" value="2567" class="year-rd border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('year')"> 2567
                                 </label>
                             </div>
                         </details>
@@ -107,40 +107,40 @@
                             </summary>
                             <div class="absolute z-30 w-full mt-1 bg-white border border-slate-200 rounded-lg shadow-lg max-h-60 overflow-y-auto p-1.5 space-y-1">
                                 <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
-                                    <input type="checkbox" value="มกราคม" class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> มกราคม
+                                    <input type="radio" name="month" value="มกราคม" class="month-rd border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> มกราคม
                                 </label>
                                 <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
-                                    <input type="checkbox" value="กุมภาพันธ์" class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> กุมภาพันธ์
+                                    <input type="radio" name="month" value="กุมภาพันธ์" class="month-rd border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> กุมภาพันธ์
                                 </label>
                                 <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
-                                    <input type="checkbox" value="มีนาคม" class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> มีนาคม
+                                    <input type="radio" name="month" value="มีนาคม" class="month-rd border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> มีนาคม
                                 </label>
                                 <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
-                                    <input type="checkbox" value="เมษายน" class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> เมษายน
+                                    <input type="radio" name="month" value="เมษายน" class="month-rd border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> เมษายน
                                 </label>
                                 <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
-                                    <input type="checkbox" value="พฤษภาคม" checked class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> พฤษภาคม
+                                    <input type="radio" name="month" value="พฤษภาคม" checked class="month-rd border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> พฤษภาคม
                                 </label>
                                 <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
-                                    <input type="checkbox" value="มิถุนายน" class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> มิถุนายน
+                                    <input type="radio" name="month" value="มิถุนายน" class="month-rd border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> มิถุนายน
                                 </label>
                                 <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
-                                    <input type="checkbox" value="กรกฎาคม" class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> กรกฎาคม
+                                    <input type="radio" name="month" value="กรกฎาคม" class="month-rd border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> กรกฎาคม
                                 </label>
                                 <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
-                                    <input type="checkbox" value="สิงหาคม" class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> สิงหาคม
+                                    <input type="radio" name="month" value="สิงหาคม" class="month-rd border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> สิงหาคม
                                 </label>
                                 <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
-                                    <input type="checkbox" value="กันยายน" class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> กันยายน
+                                    <input type="radio" name="month" value="กันยายน" class="month-rd border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> กันยายน
                                 </label>
                                 <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
-                                    <input type="checkbox" value="ตุลาคม" class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> ตุลาคม
+                                    <input type="radio" name="month" value="ตุลาคม" class="month-rd border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> ตุลาคม
                                 </label>
                                 <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
-                                    <input type="checkbox" value="พฤศจิกายน" class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> พฤศจิกายน
+                                    <input type="radio" name="month" value="พฤศจิกายน" class="month-rd border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> พฤศจิกายน
                                 </label>
                                 <label class="flex items-center gap-2 p-2 hover:bg-[#eff4ff] rounded cursor-pointer text-[13px] text-slate-700 transition">
-                                    <input type="checkbox" value="ธันวาคม" class="month-cb rounded border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> ธันวาคม
+                                    <input type="radio" name="month" value="ธันวาคม" class="month-rd border-slate-300 text-[#3b65f5] focus:ring-[#3b65f5] w-4 h-4 cursor-pointer" onchange="updateSelection('month')"> ธันวาคม
                                 </label>
                             </div>
                         </details>
@@ -162,8 +162,8 @@
                             <div class="flex items-center gap-4">
                                 <div class="w-[50px] h-[50px] shrink-0 bg-[#3b65f5] rounded-full flex items-center justify-center text-white font-bold text-[11px] italic">Logo</div>
                                 <div>
-                                    <h2 class="font-bold text-slate-800 text-sm">xxxxxxx</h2>
-                                    <p class="text-[11px] text-slate-500 mt-1">xxxxxxxxxxxxxxx</p>
+                                    <h2 class="font-bold text-slate-800 text-sm">บริษัท ตัวอย่าง จำกัด</h2>
+                                    <p class="text-[11px] text-slate-500 mt-1">123/45 ถนนสีลม แขวงสุริยวงศ์ เขตบางรัก กทม.</p>
                                 </div>
                             </div>
                             <div class="md:text-right">
@@ -175,13 +175,13 @@
                         <hr class="border-slate-100 mb-6">
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3 text-[12px] mb-8 min-w-[500px]">
-                            <div class="grid grid-cols-[100px_1fr] gap-2"><span class="text-slate-500">xxxxxxx</span> <span class="font-medium text-slate-800">xxxxxxx</span></div>
-                            <div class="grid grid-cols-[100px_1fr] gap-2"><span class="text-slate-500">xxxxxx</span> <span class="font-medium text-slate-800">xxxxxx</span></div>
+                            <div class="grid grid-cols-[100px_1fr] gap-2"><span class="text-slate-500">รหัสพนักงาน</span> <span class="font-medium text-slate-800">0012345</span></div>
+                            <div class="grid grid-cols-[100px_1fr] gap-2"><span class="text-slate-500">วันที่จ่าย</span> <span class="font-medium text-slate-800">31/05/2569</span></div>
                             <div class="grid grid-cols-[100px_1fr] gap-2"><span class="text-slate-500">ชื่อ-สกุล</span> <span class="font-medium text-slate-800">นางสาว ก ไก่</span></div>
-                            <div class="grid grid-cols-[100px_1fr] gap-2"><span class="text-slate-500">ประเภทพนักงาน</span> <span class="font-medium text-slate-800">xxxxxx</span></div>
-                            <div class="grid grid-cols-[100px_1fr] gap-2"><span class="text-slate-500">ตำแหน่ง</span> <span class="font-medium text-slate-800">xxxxxx</span></div>
-                            <div class="grid grid-cols-[100px_1fr] gap-2"><span class="text-slate-500">xxxxx</span> <span class="font-medium text-slate-800">xxxxxx</span></div>
-                            <div class="grid grid-cols-[100px_1fr] gap-2"><span class="text-slate-500">สังกัด</span> <span class="font-medium text-slate-800">xxxxxx</span></div>
+                            <div class="grid grid-cols-[100px_1fr] gap-2"><span class="text-slate-500">ประเภท</span> <span class="font-medium text-slate-800">พนักงานประจำ</span></div>
+                            <div class="grid grid-cols-[100px_1fr] gap-2"><span class="text-slate-500">ตำแหน่ง</span> <span class="font-medium text-slate-800">เจ้าหน้าที่บัญชีอาวุโส</span></div>
+                            <div class="grid grid-cols-[100px_1fr] gap-2"><span class="text-slate-500">เลขที่บัญชี</span> <span class="font-medium text-slate-800">XXX-X-XX123-X</span></div>
+                            <div class="grid grid-cols-[100px_1fr] gap-2"><span class="text-slate-500">สังกัด</span> <span class="font-medium text-slate-800">ฝ่ายบัญชีและการเงิน</span></div>
                         </div>
 
                         <div class="border border-slate-200 rounded-lg overflow-x-auto mb-6">
@@ -197,35 +197,35 @@
                                 <tbody class="text-slate-800">
                                     <tr class="border-b border-slate-50">
                                         <td class="p-3 pt-4">เงินเดือน</td>
-                                        <td class="p-3 pt-4 text-right font-medium">xxxxxxxxx</td>
+                                        <td class="p-3 pt-4 text-right font-medium">35,000.00</td>
                                         <td class="p-3 pt-4 border-l border-slate-200 pl-4">ภาษีเงินได้บุคคลธรรมดา</td>
-                                        <td class="p-3 pt-4 text-right font-medium">xxxxxxx</td>
+                                        <td class="p-3 pt-4 text-right font-medium">450.00</td>
                                     </tr>
                                     <tr class="border-b border-slate-50">
                                         <td class="p-3">ค่าครองชีพ</td>
-                                        <td class="p-3 text-right font-medium">xxxxxxxxxx</td>
+                                        <td class="p-3 text-right font-medium">2,000.00</td>
                                         <td class="p-3 border-l border-slate-200 pl-4">ประกันสังคม</td>
-                                        <td class="p-3 text-right font-medium">xxxxxx</td>
+                                        <td class="p-3 text-right font-medium">750.00</td>
                                     </tr>
                                     <tr class="border-b border-slate-50">
                                         <td class="p-3">ค่าตำแหน่ง</td>
-                                        <td class="p-3 text-right font-medium">xxxxxxxxxx</td>
+                                        <td class="p-3 text-right font-medium">3,000.00</td>
                                         <td class="p-3 border-l border-slate-200 pl-4">กองทุนสำรองเลี้ยงชีพ</td>
-                                        <td class="p-3 text-right font-medium">xxxxx</td>
+                                        <td class="p-3 text-right font-medium">1,050.00</td>
                                     </tr>
                                     <tr>
                                         <td class="p-3 pb-4">ค่าทักษะ</td>
-                                        <td class="p-3 pb-4 text-right font-medium">xxxxxxxx</td>
+                                        <td class="p-3 pb-4 text-right font-medium">1,500.00</td>
                                         <td class="p-3 pb-4 border-l border-slate-200 pl-4">เงินกู้สหกรณ์</td>
-                                        <td class="p-3 pb-4 text-right font-medium">xxxxxx</td>
+                                        <td class="p-3 pb-4 text-right font-medium">0.00</td>
                                     </tr>
                                 </tbody>
                                 <tfoot class="bg-slate-50 border-t border-slate-200 text-slate-800 font-bold">
                                     <tr>
                                         <td class="p-3">รวมรายรับ</td>
-                                        <td class="p-3 text-right">xxxxxxxxx</td>
+                                        <td class="p-3 text-right">41,500.00</td>
                                         <td class="p-3 border-l border-slate-200 pl-4">รวมรายการหัก</td>
-                                        <td class="p-3 text-right">xxxxxxx</td>
+                                        <td class="p-3 text-right">2,250.00</td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -234,41 +234,38 @@
                         <div class="bg-[#eff4ff] p-5 rounded-lg flex flex-col md:flex-row justify-between items-center mb-10 text-center md:text-left gap-4 min-w-[500px]">
                             <div>
                                 <p class="text-[#3b65f5] font-bold text-[14px]">เงินได้สุทธิ (บาท)</p>
-                                <p class="text-[11px] text-[#3b65f5] mt-1 opacity-80">ตัวอักษร (xxxxxxxxxxxxxxxxxxx)</p>
+                                <p class="text-[11px] text-[#3b65f5] mt-1 opacity-80">ตัวอักษร (สามหมื่นเก้าพันสองร้อยห้าสิบบาทถ้วน)</p>
                             </div>
-                            <div class="text-[#3b65f5] text-2xl font-bold tracking-widest">XXXXXXXX</div>
+                            <div class="text-[#3b65f5] text-2xl font-bold tracking-widest">39,250.00</div>
                         </div>
 
                         <div class="grid grid-cols-2 text-center text-[12px] pb-4 min-w-[500px]">
                             <div class="flex flex-col items-center">
-                                <p class="text-slate-800 font-medium mb-3">ลายเซ็น1</p>
-                                <p class="text-slate-700 font-medium">( นาย ก )</p>
-                                <p class="text-slate-500 mt-1">ผู้อำนวยการ</p>
+                                <p class="text-slate-800 font-medium mb-3 underline decoration-slate-200 underline-offset-8">ลายเซ็นผู้อนุมัติ</p>
+                                <p class="text-slate-700 font-medium">( นาย สมชาย มั่นคง )</p>
+                                <p class="text-slate-500 mt-1">ผู้อำนวยการฝ่ายบุคคล</p>
                                 <p class="text-slate-500">วันที่ 31/05/2569</p>
                             </div>
                             <div class="flex flex-col items-center">
-                                <p class="text-slate-800 font-medium mb-3">ลายเซ็น2</p>
-                                <p class="text-slate-700 font-medium">( นาย ข )</p>
-                                <p class="text-slate-500 mt-1">รองผู้อำนวยการ</p>
+                                <p class="text-slate-800 font-medium mb-3 underline decoration-slate-200 underline-offset-8">ลายเซ็นผู้รับเงิน</p>
+                                <p class="text-slate-700 font-medium">( นางสาว ก ไก่ )</p>
+                                <p class="text-slate-500 mt-1">พนักงาน</p>
                                 <p class="text-slate-500">วันที่ 31/05/2569</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 self-start">
+
                         
-                        <h3 class="font-bold text-slate-800 mb-1 text-[14px]">ขอสลิปฉบับจริง</h3>
-                        <p class="text-[11px] text-slate-500 mb-6">คุณสามารถขอสลิปเงินเดือนฉบับจริงเพื่อนำไปใช้งานได้</p>
-                        
-                        <p class="text-[12px] font-bold mb-3 text-slate-800">เลือกประเภทลายเซ็น</p>
-                        
+                        <p class="text-[12px] font-bold mb-3 text-slate-800">เลือกประเภทไฟล์</p>
                         <div class="space-y-3 mb-6">
                             <label id="opt-pdf" class="block border-2 border-[#3b65f5] rounded-lg p-3 cursor-pointer bg-[#eff4ff] transition" onclick="selectAction('pdf')">
                                 <div class="flex items-center gap-3">
                                     <input type="radio" name="file_type" id="radio-pdf" checked class="w-4 h-4 text-[#3b65f5] focus:ring-[#3b65f5] cursor-pointer">
                                     <div class="flex-1">
-                                        <p id="text-pdf-1" class="text-[13px] font-bold text-[#3b65f5]">Donwload เป็น PDF</p>
-                                        <p id="text-pdf-2" class="text-[10px] text-[#3b65f5] mt-0.5">โหลดเป็นไฟล์ PDF</p>
+                                        <p id="text-pdf-1" class="text-[13px] font-bold text-[#3b65f5]">Download เป็น PDF</p>
+                                        <p id="text-pdf-2" class="text-[10px] text-[#3b65f5] mt-0.5">เหมาะสำหรับการยื่นเอกสาร</p>
                                     </div>
                                     <i class="fas fa-file-pdf text-red-500 text-xl"></i>
                                 </div>
@@ -278,7 +275,7 @@
                                 <div class="flex items-center gap-3">
                                     <input type="radio" name="file_type" id="radio-png" class="w-4 h-4 text-[#3b65f5] focus:ring-[#3b65f5] cursor-pointer">
                                     <div class="flex-1">
-                                        <p id="text-png-1" class="text-[13px] font-bold text-slate-700">Donwload เป็น Png</p>
+                                        <p id="text-png-1" class="text-[13px] font-bold text-slate-700">Download เป็น PNG</p>
                                         <p id="text-png-2" class="text-[10px] text-slate-500 mt-0.5">โหลดเป็นไฟล์รูปภาพ</p>
                                     </div>
                                     <i class="fas fa-image text-[#3b65f5] text-xl"></i>
@@ -286,23 +283,15 @@
                             </label>
                         </div>
 
-                        <p class="text-[12px] font-bold mb-3 text-slate-800">จัดส่งรูปแบบ</p>
-                        
+                        <p class="text-[12px] font-bold mb-3 text-slate-800">พิมพ์เอกสาร</p>
                         <div id="opt-print" class="border border-slate-200 rounded-lg p-4 flex items-center gap-4 mb-6 bg-white cursor-pointer hover:bg-slate-50 transition" onclick="selectAction('print')">
                             <div class="w-10 h-10 bg-slate-100 flex items-center justify-center rounded border border-slate-200 text-slate-600 shadow-sm">
                                 <i class="fas fa-print"></i>
                             </div>
                             <div>
-                                <p id="text-print-1" class="text-[13px] font-bold text-slate-700">Print</p>
-                                <p id="text-print-2" class="text-[10px] text-slate-500 mt-0.5">ปริ้นเลย</p>
+                                <p id="text-print-1" class="text-[13px] font-bold text-slate-700">พิมพ์สลิป</p>
+                                <p id="text-print-2" class="text-[10px] text-slate-500 mt-0.5">ส่งคำสั่งไปยังเครื่องพิมพ์</p>
                             </div>
-                        </div>
-
-                        <div class="text-[10px] text-slate-400 space-y-1.5 mb-6">
-                            <p>หมายเหตุ</p>
-                            <p>• ระยะเวลาดำเนินการ 3-5 วันทำการ</p>
-                            <p>• สามารถติดตามสถานะการขอได้ที่</p>
-                            <p>• ประวัติการขอสลิป</p>
                         </div>
 
                         <button id="action-btn" class="w-full bg-[#3b65f5] text-white py-3 rounded-lg text-[13px] font-bold hover:bg-blue-700 transition flex items-center justify-center gap-2 shadow-sm">
@@ -310,80 +299,60 @@
                         </button>
                     </div>
                 </div>
-                
             </div>
         </div>
     </main>
 
     <script>
-        // แสดงข้อมูลเมื่อกดดูสลิป
-        function showSlipData() {
-            const yearChecked = document.querySelectorAll('.year-cb:checked').length > 0;
-            const monthChecked = document.querySelectorAll('.month-cb:checked').length > 0;
-
-            if (!yearChecked || !monthChecked) {
-                alert('กรุณาเลือกปีและเดือนที่ต้องการก่อนครับ');
-                return;
-            }
-
-            // ซ่อน Empty State และแสดง Slip Content
-            document.getElementById('empty-state').classList.add('hidden');
-            document.getElementById('slip-content').classList.remove('hidden');
-            
-            // ดึงค่าเดือนล่าสุดที่เลือกมาแสดงผลแบบง่ายๆ (Optional)
-            const firstCheckedMonth = document.querySelector('.month-cb:checked').value;
-            const firstCheckedYear = document.querySelector('.year-cb:checked').value;
-            document.getElementById('slip-date-header').innerText = `เดือน${firstCheckedMonth} ${firstCheckedYear}`;
-        }
-
-        // ฟังก์ชันเปิด/ปิด Sidebar บนมือถือ
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebar-overlay');
-            
             sidebar.classList.toggle('-translate-x-full');
             overlay.classList.toggle('hidden');
         }
 
-        // ฟังก์ชันอัปเดตข้อความบน Dropdown Multi-select
         function updateSelection(type) {
-            const checkboxes = document.querySelectorAll(`.${type}-cb:checked`);
             const displaySpan = document.getElementById(`${type}-display`);
             
-            let selectedValues = Array.from(checkboxes).map(cb => cb.value);
-            
-            if (selectedValues.length === 0) {
-                displaySpan.innerText = 'เลือก...';
-                displaySpan.classList.add('text-slate-400');
-                displaySpan.classList.remove('text-slate-700');
-            } else if (selectedValues.length <= 2) {
-                displaySpan.innerText = selectedValues.join(', ');
-                displaySpan.classList.remove('text-slate-400');
-                displaySpan.classList.add('text-slate-700');
-            } else {
-                displaySpan.innerText = `เลือก ${selectedValues.length} รายการ`;
-                displaySpan.classList.remove('text-slate-400');
-                displaySpan.classList.add('text-slate-700');
+            if (type === 'month') {
+                const selectedRadio = document.querySelector('.month-rd:checked');
+                if (selectedRadio) {
+                    displaySpan.innerText = selectedRadio.value;
+                    displaySpan.classList.remove('text-slate-400');
+                    displaySpan.classList.add('text-slate-700');
+                    document.getElementById('month-details').removeAttribute('open');
+                }
+            } else if (type === 'year') {
+                // ปรับปรุงส่วนเลือกปีให้ปิด dropdown ทันทีเมื่อเลือก (เพราะเลือกได้ค่าเดียว)
+                const selectedRadio = document.querySelector('.year-rd:checked');
+                if (selectedRadio) {
+                    displaySpan.innerText = selectedRadio.value;
+                    displaySpan.classList.remove('text-slate-400');
+                    displaySpan.classList.add('text-slate-700');
+                    document.getElementById('year-details').removeAttribute('open');
+                }
             }
         }
 
-        // สคริปต์เพื่อให้ Dropdown ปิดอัตโนมัติเมื่อคลิกพื้นที่อื่น
-        document.addEventListener('click', function(event) {
-            const yearDetails = document.getElementById('year-details');
-            const monthDetails = document.getElementById('month-details');
-            
-            if (yearDetails && !yearDetails.contains(event.target)) {
-                yearDetails.removeAttribute('open');
-            }
-            if (monthDetails && !monthDetails.contains(event.target)) {
-                monthDetails.removeAttribute('open');
-            }
-        });
+        function showSlipData() {
+            // เช็คค่าจาก Radio ทั้งปีและเดือน
+            const yearSelected = document.querySelector('.year-rd:checked');
+            const monthSelected = document.querySelector('.month-rd:checked');
 
-        // ฟังก์ชันควบคุมการเลือกรูปแบบดาวน์โหลด/Print ทางแผงด้านขวา
+            if (!yearSelected || !monthSelected) {
+                alert('กรุณาเลือกทั้งปีและเดือนก่อนครับ');
+                return;
+            }
+
+            document.getElementById('empty-state').classList.add('hidden');
+            document.getElementById('slip-content').classList.remove('hidden');
+            
+            // แสดงข้อมูลปีที่เลือกจริง
+            document.getElementById('slip-date-header').innerText = `เดือน${monthSelected.value} ${yearSelected.value}`;
+        }
+
         function selectAction(selectedOption) {
             const options = ['pdf', 'png', 'print'];
-
             options.forEach(opt => {
                 const container = document.getElementById(`opt-${opt}`);
                 const text1 = document.getElementById(`text-${opt}-1`);
@@ -391,38 +360,30 @@
                 const radio = document.getElementById(`radio-${opt}`);
 
                 if (opt === selectedOption) {
-                    container.className = opt === 'print' 
-                        ? 'border-2 border-[#3b65f5] rounded-lg p-4 flex items-center gap-4 mb-6 bg-[#eff4ff] cursor-pointer transition'
-                        : 'block border-2 border-[#3b65f5] rounded-lg p-3 cursor-pointer bg-[#eff4ff] transition';
-                    
-                    text1.classList.remove('text-slate-700');
-                    text1.classList.add('text-[#3b65f5]');
-                    text2.classList.remove('text-slate-500');
-                    text2.classList.add('text-[#3b65f5]');
-                    
+                    container.classList.add('border-2', 'border-[#3b65f5]', 'bg-[#eff4ff]');
+                    container.classList.remove('border-slate-200', 'bg-white');
+                    text1.classList.replace('text-slate-700', 'text-[#3b65f5]');
+                    text2.classList.replace('text-slate-500', 'text-[#3b65f5]');
                     if (radio) radio.checked = true;
                 } else {
-                    container.className = opt === 'print'
-                        ? 'border border-slate-200 rounded-lg p-4 flex items-center gap-4 mb-6 bg-white cursor-pointer hover:bg-slate-50 transition'
-                        : 'block border border-slate-200 rounded-lg p-3 cursor-pointer bg-white hover:bg-slate-50 transition';
-                    
-                    text1.classList.add('text-slate-700');
-                    text1.classList.remove('text-[#3b65f5]');
-                    text2.classList.add('text-slate-500');
-                    text2.classList.remove('text-[#3b65f5]');
-                    
+                    container.classList.remove('border-2', 'border-[#3b65f5]', 'bg-[#eff4ff]');
+                    container.classList.add('border', 'border-slate-200', 'bg-white');
+                    text1.classList.replace('text-[#3b65f5]', 'text-slate-700');
+                    text2.classList.replace('text-[#3b65f5]', 'text-slate-500');
                     if (radio) radio.checked = false;
                 }
             });
 
-            // ปรับปุ่มให้สอดคล้องกับสิ่งที่กด
             const actionBtn = document.getElementById('action-btn');
-            if (selectedOption === 'print') {
-                actionBtn.innerHTML = '<i class="fas fa-print"></i> Print';
-            } else {
-                actionBtn.innerHTML = '<i class="fas fa-download"></i> Download';
-            }
+            actionBtn.innerHTML = selectedOption === 'print' ? '<i class="fas fa-print"></i> Print' : '<i class="fas fa-download"></i> Download';
         }
+
+        document.addEventListener('click', function(event) {
+            const yearDetails = document.getElementById('year-details');
+            const monthDetails = document.getElementById('month-details');
+            if (yearDetails && !yearDetails.contains(event.target)) yearDetails.removeAttribute('open');
+            if (monthDetails && !monthDetails.contains(event.target)) monthDetails.removeAttribute('open');
+        });
     </script>
 </body>
 </html>
