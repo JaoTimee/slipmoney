@@ -46,7 +46,7 @@
 
         <nav class="flex-1 overflow-y-auto no-scrollbar px-4 space-y-2 mt-4">
             <a href="#" class="flex items-center gap-3 px-4 py-3 bg-[#2563eb] text-white rounded-lg transition text-[13px] font-medium shadow-md">
-                <i class="fas fa-file-invoice-dollar w-5 text-center"></i> จัดการเงินเดือน
+                <i class="fas fa-money-bill-wave w-5 text-center"></i> รายการการเงินเดือน
             </a>
             <a href="edit_signature.html" class="flex items-center gap-3 px-4 py-3 hover:bg-white/10 text-white/80 hover:text-white rounded-lg transition text-[13px]">
                 <i class="fas fa-edit w-5 text-center"></i> จัดการลายเซ็น
@@ -160,7 +160,6 @@
                     <table class="w-full text-[13px] text-left text-gray-600 whitespace-nowrap">
                         <thead class="bg-slate-50 border-b border-gray-200 text-gray-500">
                             <tr>
-                                <th class="px-4 py-3 text-center w-12"><input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500"></th>
                                 <th class="px-4 py-3 text-center font-medium w-16">ลำดับ</th>
                                 <th class="px-4 py-3 font-medium">วัน/เดือน/ปี</th>
                                 <th class="px-4 py-3 font-medium">ชื่อ-สกุล</th>
@@ -262,7 +261,7 @@
             tbody.innerHTML = '';
             
             if (filteredData.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="8" class="px-4 py-8 text-center text-gray-500">ไม่พบข้อมูลสลิปเงินเดือนที่ตรงกับเงื่อนไข</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="7" class="px-4 py-8 text-center text-gray-500">ไม่พบข้อมูลสลิปเงินเดือนที่ตรงกับเงื่อนไข</td></tr>`;
                 document.getElementById('table-info').innerText = `แสดง 0 รายการ`;
                 return;
             }
@@ -272,7 +271,6 @@
                 const tr = document.createElement('tr');
                 tr.className = 'hover:bg-gray-50 transition-colors';
                 tr.innerHTML = `
-                    <td class="px-4 py-3 text-center"><input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500"></td>
                     <td class="px-4 py-3 text-center text-slate-500">${index + 1}</td>
                     <td class="px-4 py-3 text-gray-500">${row.date}</td>
                     <td class="px-4 py-3">${row.name}</td>
