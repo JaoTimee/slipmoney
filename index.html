@@ -96,7 +96,7 @@
                     <div class="mb-5">
                         <input type="text" id="username" required
                             class="w-full px-4 py-3.5 rounded bg-[#f8f9fa] text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400"
-                            placeholder="Username (admin, staff, user)">
+                            placeholder="Username (superadmin, admin, staff, user)">
                     </div>
 
                     <div class="relative mb-6">
@@ -172,7 +172,7 @@
 
         <div class="text-center mt-8">
             <p class="text-[10px] text-blue-200/70 italic">
-                เริ่มต้น: Admin: admin | Staff: staff | User: user (Pass เริ่มต้น: 1234)
+                เริ่มต้น: Admin: admin | Staff: staff | User: user | Superadmin: superadmin (Pass เริ่มต้น: 1234)
             </p>
         </div>
     </div>
@@ -183,6 +183,7 @@
         const mockDatabase = {
             'admin': { password: '1234', role: 'ผู้ดูแลระบบ (Admin)', url: 'admin/data.html' },
             'staff': { password: '1234', role: 'เจ้าหน้าที่ (Staff)', url: 'staff/data.html' },
+            'superadmin': { password: '1234', role: 'เจ้าหน้าที่ระดับสูง (Superadmin)', url: 'superadmin/adduser.html' },
             'user':  { password: '1234', role: 'ผู้ใช้งานทั่วไป (User)', url: 'user/money.html' }
         };
 
